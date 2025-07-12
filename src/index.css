@@ -1,1 +1,12 @@
 @import 'tailwindcss';
+@theme {
+  --font-pokedex: 'Pixelify Sans', monospace;
+
+  --color-background: #33658A;
+  --color-card-background: rgba(255, 255, 255, 0.04);
+  --color-text: #DDE3EA;
+  --color-border: rgba(255, 255, 255, 0.2);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-accent: #4FC3F7;
+  --color-danger: #EF5350;
+}
