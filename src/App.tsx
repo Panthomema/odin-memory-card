@@ -4,10 +4,10 @@ import Scoreboard from "./components/Scoreboard";
 function App() {
   return (
     <>
-      <main className="flex-grow grid place-items-center">
+      <main>
         <CardGrid />
       </main>
-      <footer className="p-2 sm:p-4 md:p-6">
+      <footer>
         <Scoreboard />
       </footer>
     </>

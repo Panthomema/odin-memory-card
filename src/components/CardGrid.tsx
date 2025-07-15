@@ -32,7 +32,7 @@ function CardGrid() {
   console.log(cards);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div>
       {cards.map((pokemon) => (
         <Card key={pokemon.name} pokemon={pokemon} />
       ))}
