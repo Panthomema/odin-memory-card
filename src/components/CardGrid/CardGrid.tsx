@@ -20,7 +20,7 @@ function CardGrid() {
             name: details.name,
             spriteUrl: details.sprites.front_default,
           };
-        })
+        }),
       );
 
       setCards(cardData);

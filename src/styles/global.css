@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', system-ui, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+/* NES.css requiere que el font-family sea heredado en body */
+html {
+  font-family: inherit;
+}
