@@ -1,6 +1,15 @@
+@font-face {
+  font-family: 'pkmn_rbygscregular';
+  src:
+    url('../assets/fonts/pkmnrbygsc-webfont.woff2') format('woff2'),
+    url('../assets/fonts/pkmnrbygsc-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: 'Press Start 2P', system-ui, sans-serif;
+  font-family: 'pkmn_rbygscregular', monospace, system-ui;
   background-color: #fff;
   color: #000;
 }
