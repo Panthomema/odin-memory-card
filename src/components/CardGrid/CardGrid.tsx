@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { PokemonDetails, PokemonList } from '../types/api';
-import type { PokemonCardData } from '../types/ui';
+import type { PokemonDetails, PokemonList } from '@/types/api';
+import type { PokemonCardData } from '@/types/ui';
 import Card from './Card';
 
 function CardGrid() {

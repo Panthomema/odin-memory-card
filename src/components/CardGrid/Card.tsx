@@ -1,4 +1,4 @@
-import type { PokemonCardData } from '../../types/ui';
+import type { PokemonCardData } from '@/types/ui';
 
 type Props = {
   pokemon: PokemonCardData;

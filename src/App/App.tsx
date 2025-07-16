@@ -1,9 +1,10 @@
-import Scoreboard from '../components/Scoreboard/Scoreboard';
+import Scoreboard from '@/components/Scoreboard/Scoreboard';
+import styles from '@/App/App.module.css';
 
 function App() {
   return (
     <>
-      <main>{/* <CardGrid /> */}</main>
+      <main className={styles.main}>{/* <CardGrid /> */}</main>
       <footer>
         <Scoreboard />
       </footer>
