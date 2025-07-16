@@ -17,6 +17,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "modern-normalize": "^3.0.1",
     "nes.css": "^2.2.1",
     "react": "^19.1.0",
