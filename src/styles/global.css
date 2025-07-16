@@ -7,14 +7,33 @@
   font-style: normal;
 }
 
-body {
-  margin: 0;
+html {
   font-family: 'pkmn_rbygscregular', monospace, system-ui;
+}
+
+body {
+  font-family: inherit;
   background-color: #fff;
+  background-image: url('/lavender-town-ghost.jpg');
+  background-size: cover;
+  background-position: center;
   color: #000;
 }
 
-/* NES.css requiere que el font-family sea heredado en body */
-html {
-  font-family: inherit;
+@supports (background-image: url('image.avif')) {
+  body {
+    background-image: url('/lavender-town-ghost.avif');
+  }
+}
+
+@supports (background-image: url('image.webp')) {
+  body {
+    background-image: url('/lavender-town-ghost.webp');
+  }
+}
+
+#root {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
