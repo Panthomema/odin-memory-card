@@ -139,12 +139,12 @@ type GenerationI = {
 };
 
 type RedBlue = {
-  back_default: null | string;
-  back_gray: null | string;
-  back_transparent: null | string;
-  front_default: null | string;
-  front_gray: null | string;
-  front_transparent: null | string;
+  back_default: string;
+  back_gray: string;
+  back_transparent: string;
+  front_default: string;
+  front_gray: string;
+  front_transparent: string;
 };
 
 type GenerationIi = {
@@ -154,22 +154,22 @@ type GenerationIi = {
 };
 
 type Crystal = {
-  back_default: null | string;
-  back_shiny: null | string;
-  back_shiny_transparent: null | string;
-  back_transparent: null | string;
-  front_default: null | string;
-  front_shiny: null | string;
-  front_shiny_transparent: null | string;
-  front_transparent: null | string;
+  back_default: string;
+  back_shiny: string;
+  back_shiny_transparent: string;
+  back_transparent: string;
+  front_default: string;
+  front_shiny: string;
+  front_shiny_transparent: string;
+  front_transparent: string;
 };
 
 type Gold = {
-  back_default: null | string;
-  back_shiny: null | string;
-  front_default: null | string;
-  front_shiny: null | string;
-  front_transparent?: null | string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
+  front_transparent?: string;
 };
 
 type GenerationIii = {
@@ -179,8 +179,8 @@ type GenerationIii = {
 };
 
 type OfficialArtwork = {
-  front_default: null | string;
-  front_shiny: null | string;
+  front_default: string;
+  front_shiny: string;
 };
 
 type Home = {
@@ -209,4 +209,3 @@ type Stat = {
   effort: number;
   stat: Species;
 };
-

@@ -1,0 +1,19 @@
+.card {
+  background-color: var(--color-bg);
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: var(--spacing-sm);
+  width: 125px;
+  height: 155px;
+
+  /* Reset nes-container styles */
+  margin: 0 !important;
+  border-image-repeat: unset !important;
+  padding: var(--spacing-sm) !important;
+}
+
+.name {
+  text-align: center;
+}
