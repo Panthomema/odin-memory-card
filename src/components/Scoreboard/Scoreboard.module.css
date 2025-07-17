@@ -1,6 +1,13 @@
 .scoreboard {
-  font-size: 20px;
   display: flex;
   justify-content: space-around;
-  padding: 1em;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  padding: var(--spacing-xs);
+}
+
+@media (width >= 768px) {
+  .scoreboard {
+    max-width: 500px;
+  }
 }

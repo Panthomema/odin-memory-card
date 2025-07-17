@@ -1,34 +1,70 @@
 @font-face {
   font-family: 'pkmn_rbygscregular';
   src:
-    url('../assets/fonts/pkmnrbygsc-webfont.woff2') format('woff2'),
-    url('../assets/fonts/pkmnrbygsc-webfont.woff') format('woff');
+    url('/fonts/pkmnrbygsc-webfont.woff2') format('woff2'),
+    url('/fonts/pkmnrbygsc-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
+:root {
+  --color-bg: #f8f3f8;
+  --color-text: #181010;
+  --font-size-base: 14px;
+  --spacing-xs: calc(var(--font-size-base) * 0.5);
+  --spacing-sm: calc(var(--font-size-base) * 1);
+  --spacing-md: calc(var(--font-size-base) * 1.5);
+  --spacing-lg: calc(var(--font-size-base) * 2);
+}
+
+/* Móviles grandes / tablets pequeñas */
+@media (width >= 425px) {
+  :root {
+    --font-size-base: 16px;
+  }
+}
+
+@media (width >= 768px) {
+  :root {
+    --font-size-base: 18px;
+  }
+}
+
+@media (width >= 1024px) {
+  :root {
+    --font-size-base: 20px;
+  }
+}
+
+@media (width >= 1280px) {
+  :root {
+    --font-size-base: 22px;
+  }
+}
+
 html {
   font-family: 'pkmn_rbygscregular', monospace, system-ui;
+  font-size: var(--font-size-base);
 }
 
 body {
   font-family: inherit;
   background-color: #fff;
-  background-image: url('/lavender-town-ghost.jpg');
+  background-image: url('/images/lavender-town-ghost.jpg');
   background-size: cover;
   background-position: center;
-  color: #000;
+  color: var(--color-text);
 }
 
 @supports (background-image: url('image.avif')) {
   body {
-    background-image: url('/lavender-town-ghost.avif');
+    background-image: url('/images/lavender-town-ghost.avif');
   }
 }
 
 @supports (background-image: url('image.webp')) {
   body {
-    background-image: url('/lavender-town-ghost.webp');
+    background-image: url('/images/lavender-town-ghost.webp');
   }
 }
 
@@ -36,10 +72,22 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 @supports (height: 100dvh) {
   #root {
     height: 100dvh;
   }
+}
+
+/* Utilities */
+
+.box {
+  background-color: var(--color-bg);
+  border-width: 21px;
+  border-style: solid;
+  border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAMAAAAPdrEwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAABgQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMM8PuMAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4xLjVkR1hSAAAA5UlEQVRoQ+3MQQrDMBBD0fb+h06N/2A+MTHdTtBbKRpHn0u+UtUf6oepqinTQ1VT62kfyNgbuHcGTaYXmqbT9XXEU6vDUaZvWk/XHxtfn/KOa6YXrk2n/UGGG7K5J8NNpgc3rafBAW7I5p4MGmR6oMFrpvf8xG+ckemV0XraB+czv3RGpldG62n47PzEb5yR6ZXxmmm4IZt7MmiQ6YEGrad9IGNv4N4ZNJleaJpO19cRT60OR5m+aT1df2x8fco7rpleuDad9gcZbsjmngw3mR7ctJ4GB1T1h/phqmrK9FDV1HH6un4ss9jsFZtJkQAAAABJRU5ErkJggg==')
+    42 round;
 }

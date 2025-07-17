@@ -3,9 +3,9 @@ import clsx from 'clsx';
 
 function Scoreboard() {
   return (
-    <div className={clsx(styles.scoreboard, 'modal')}>
-      <div>Score: 0</div>
-      <div>Best Score: 0</div>
+    <div className={clsx(styles.scoreboard, 'box')}>
+      <div>Viewed: 0</div>
+      <div>Captured: 0</div>
     </div>
   );
 }
