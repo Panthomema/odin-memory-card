@@ -10,10 +10,10 @@ function CardGrid() {
   useEffect(() => {
     async function fetchPokemon() {
       const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=6');
-      const json: PokemonList = await res.json();
+      const pokemons: PokemonList = await res.json();
 
       const cardData = await Promise.all(
-        json.results.map(async (pokemon) => {
+        pokemons.results.map(async (pokemon) => {
           const res = await fetch(pokemon.url);
           const details: PokemonDetails = await res.json();
 

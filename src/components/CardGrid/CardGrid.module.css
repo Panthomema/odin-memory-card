@@ -4,3 +4,9 @@
   gap: var(--spacing-md);
   place-content: center;
 }
+
+@media (orientation: landscape) {
+  .card-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}

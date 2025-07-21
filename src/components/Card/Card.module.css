@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
+  align-items: center;
   gap: var(--spacing-sm);
   width: 125px;
   height: 155px;
@@ -16,4 +17,9 @@
 
 .name {
   text-align: center;
+}
+
+.image {
+  width: var(--image-width);
+  height: auto;
 }
