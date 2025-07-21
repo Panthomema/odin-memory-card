@@ -4,6 +4,7 @@
   gap: var(--spacing-xs);
   flex-wrap: wrap;
   padding: var(--spacing-xs);
+  margin-left: auto;
 }
 
 @media (width >= 768px) {

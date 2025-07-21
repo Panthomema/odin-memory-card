@@ -54,6 +54,7 @@ body {
   background-size: cover;
   background-position: center;
   color: var(--color-text);
+  overflow: hidden;
 }
 
 @supports (background-image: url('image.avif')) {

@@ -1,0 +1,8 @@
+.btn {
+  border-image-repeat: unset;
+  padding: calc(var(--spacing-xs) / 1.5);
+}
+
+.icon {
+  height: 1rem;
+}
