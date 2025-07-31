@@ -5,14 +5,14 @@
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
   width: 12.5em;
   aspect-ratio: 25/31;
 
   /* Reset nes-container styles */
   margin: 0 !important;
   border-image-repeat: unset !important;
-  padding: var(--spacing-sm) !important;
+  padding: var(--spacing-md) !important;
 }
 
 .name {

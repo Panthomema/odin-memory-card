@@ -2,5 +2,5 @@
   flex: 1;
   display: grid;
   place-items: center;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
 }

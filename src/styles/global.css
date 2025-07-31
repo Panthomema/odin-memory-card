@@ -10,10 +10,10 @@
 :root {
   --color-bg: #fff;
   --color-text: #181010;
-  --spacing-xs: calc(var(--font-size-base) * 0.5);
-  --spacing-sm: calc(var(--font-size-base) * 1);
-  --spacing-md: calc(var(--font-size-base) * 1.5);
-  --spacing-lg: calc(var(--font-size-base) * 2);
+  --spacing-xs: calc(var(--font-size-base) * 0.25);
+  --spacing-sm: calc(var(--font-size-base) * 0.5);
+  --spacing-md: calc(var(--font-size-base) * 1);
+  --spacing-lg: calc(var(--font-size-base) * 1.5);
 }
 
 /* Mobile S landscape */

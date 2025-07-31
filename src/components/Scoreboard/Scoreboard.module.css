@@ -1,9 +1,9 @@
 .scoreboard {
   display: flex;
   justify-content: space-around;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   flex-wrap: wrap;
-  padding: var(--spacing-xs);
+  padding: var(--spacing-sm);
   margin-left: auto;
   font-size: 1rem;
 }

@@ -1,6 +1,6 @@
 .btn {
   border-image-repeat: unset;
-  padding: calc(var(--spacing-xs) / 1.5);
+  padding: var(--spacing-xs);
 }
 
 .icon {
