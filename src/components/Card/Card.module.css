@@ -6,8 +6,8 @@
   justify-content: end;
   align-items: center;
   gap: var(--spacing-sm);
-  width: 125px;
-  height: 155px;
+  width: 12.5em;
+  aspect-ratio: 25/31;
 
   /* Reset nes-container styles */
   margin: 0 !important;

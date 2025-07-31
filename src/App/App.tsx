@@ -6,8 +6,12 @@ import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 function App() {
   return (
     <>
-      <header className={styles.header}>{<SfxToggleButton />}</header>
-      <main className={styles.main}>{<CardGrid />}</main>
+      <header className={styles.header}>
+        <SfxToggleButton />
+      </header>
+      <main className={styles.main}>
+        <CardGrid />
+      </main>
       <footer>
         <Scoreboard />
       </footer>

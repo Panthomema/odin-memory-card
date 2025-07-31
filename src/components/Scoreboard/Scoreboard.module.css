@@ -5,10 +5,11 @@
   flex-wrap: wrap;
   padding: var(--spacing-xs);
   margin-left: auto;
+  font-size: 1rem;
 }
 
-@media (width >= 768px) {
+@media (width >= 425px) {
   .scoreboard {
-    max-width: 500px;
+    max-width: 35em;
   }
 }
