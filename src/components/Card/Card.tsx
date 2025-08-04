@@ -2,11 +2,11 @@ import styles from '@/components/Card/Card.module.css';
 import type { PokemonCardData } from '@/types/ui';
 import clsx from 'clsx';
 
-type Props = {
+type CardProps = {
   pokemon: PokemonCardData;
 };
 
-function Card({ pokemon }: Props) {
+function Card({ pokemon }: CardProps) {
   const capitalizedName =
     pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
