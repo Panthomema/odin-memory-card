@@ -6,7 +6,7 @@ type WelcomeModalProps = {
 
 function WelcomeModal({ isOpen }: WelcomeModalProps) {
   return (
-    <Modal title="WELCOME TO POKÉMEMORY!" imgName="pokeball" isOpen={isOpen}>
+    <Modal title="WELCOME!" imgName="pokeball" isOpen={isOpen}>
       <p>
         <b>The ghost</b> has escaped from the Pokémon Tower, with some other
         pokémons' spirits.
@@ -16,8 +16,7 @@ function WelcomeModal({ isOpen }: WelcomeModalProps) {
       </p>
       <p>
         You only have one pokéball, so if you try to <b>capture</b>
-        anything that <b>isn't</b> the ghost, it will
-        <b>haunt</b> you!
+        anything that <b>isn't</b> the ghost, it will <b>haunt</b> you!
       </p>
     </Modal>
   );
