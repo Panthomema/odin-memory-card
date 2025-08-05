@@ -1,27 +1,13 @@
 import Modal from '@/components/Modal/Modal';
+import type { ModalAction } from '@/types/ui';
 
-function WelcomeModal() {
+type WelcomeModalProps = {
+  actions: [ModalAction, ModalAction];
+};
+
+function WelcomeModal({ actions }: WelcomeModalProps) {
   return (
-    <Modal
-      title="WELCOME!"
-      imgName="pokeball"
-      actions={[
-        {
-          label: 'PLAY',
-          onCommit: () => {
-            alert('PLAY');
-          },
-          index: 0,
-        },
-        {
-          label: 'RESET',
-          onCommit: () => {
-            alert('RESET');
-          },
-          index: 1,
-        },
-      ]}
-    >
+    <Modal title="WELCOME!" imgName="pokeball" actions={actions}>
       <p>
         <b>The ghost</b> has escaped from the Pokémon Tower, with some other
         pokémons' spirits.

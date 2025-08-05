@@ -13,3 +13,5 @@ export type ModalAction = {
 export type ModalActionIndex = 0 | 1;
 
 export type NavigationIncrement = 1 | -1;
+
+export type GameState = 'start' | 'playing' | 'end';
