@@ -8,14 +8,14 @@ function WelcomeModal() {
       actions={[
         {
           label: 'PLAY',
-          do: () => {
+          onCommit: () => {
             alert('PLAY');
           },
           index: 0,
         },
         {
           label: 'RESET',
-          do: () => {
+          onCommit: () => {
             alert('RESET');
           },
           index: 1,

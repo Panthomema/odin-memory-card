@@ -6,7 +6,7 @@ export type PokemonCardData = {
 
 export type ModalAction = {
   label: string;
-  do: () => void;
+  onCommit: () => void;
   index: ModalActionIndex;
 };
 

@@ -62,4 +62,5 @@
 .actions label {
   /* Reset base nes.css label styles */
   margin: 0;
+  font-size: 1rem;
 }

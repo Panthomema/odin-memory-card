@@ -1,3 +1,4 @@
+import ActionRadio from '@/components/ActionRadio/ActionRadio';
 import styles from '@/components/Modal/Modal.module.css';
 import type {
   ModalAction,
@@ -5,7 +6,7 @@ import type {
   NavigationIncrement,
 } from '@/types/ui';
 import clsx from 'clsx';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type ModalProps = {
   title: string;
@@ -21,23 +22,23 @@ function Modal({ title, imgName, children, actions }: ModalProps) {
 
   const displayedIndex = hoveredIndex ?? selectedActionIndex;
 
-  const handleNavigate = (increment: NavigationIncrement) => {
-    setSelectedActionIndex((prev) => {
-      const newIndex = prev + increment;
-      if (newIndex === 0 || newIndex === 1) return newIndex;
-      return prev;
-    });
-  };
-
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    modalRef.current?.focus(); // Enfoca el contenedor al abrir
+    modalRef.current?.focus(); // Focus the container to prevent radio problems
   }, []);
 
   useEffect(() => {
+    const handleNavigate = (increment: NavigationIncrement) => {
+      setSelectedActionIndex((prev) => {
+        const newIndex = prev + increment;
+        if (newIndex === 0 || newIndex === 1) return newIndex;
+        return prev;
+      });
+    };
+
     const handleEnter = () => {
-      actions[selectedActionIndex].do();
+      actions[selectedActionIndex].onCommit();
     };
 
     const handleKeydown = (e: KeyboardEvent) => {
@@ -80,7 +81,7 @@ function Modal({ title, imgName, children, actions }: ModalProps) {
               key={index}
               label={action.label}
               checked={displayedIndex === index}
-              onClick={action.do}
+              onClick={action.onCommit}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             />
@@ -88,39 +89,6 @@ function Modal({ title, imgName, children, actions }: ModalProps) {
         </div>
       </div>
     </div>
-  );
-}
-
-type ActionRadioProps = {
-  label: string;
-  checked: boolean;
-  onClick: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-};
-
-function ActionRadio({
-  label,
-  checked,
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
-}: ActionRadioProps) {
-  return (
-    <label onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <input
-        type="radio"
-        className="nes-radio"
-        name="action"
-        checked={checked}
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick();
-        }}
-        readOnly
-      />
-      <span>{label}</span>
-    </label>
   );
 }
 
