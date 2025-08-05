@@ -3,3 +3,13 @@ export type PokemonCardData = {
   spriteUrl: string;
   scale: number;
 };
+
+export type ModalAction = {
+  label: string;
+  do: () => void;
+  index: ModalActionIndex;
+};
+
+export type ModalActionIndex = 0 | 1;
+
+export type NavigationIncrement = 1 | -1;

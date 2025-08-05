@@ -7,7 +7,7 @@ import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
 function App() {
   return (
     <>
-      <WelcomeModal isOpen={true} />
+      <WelcomeModal />
       <header className={styles.header}>
         <SfxToggleButton />
       </header>

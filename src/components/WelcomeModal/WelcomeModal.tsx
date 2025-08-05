@@ -1,12 +1,27 @@
 import Modal from '@/components/Modal/Modal';
 
-type WelcomeModalProps = {
-  isOpen: boolean;
-};
-
-function WelcomeModal({ isOpen }: WelcomeModalProps) {
+function WelcomeModal() {
   return (
-    <Modal title="WELCOME!" imgName="pokeball" isOpen={isOpen}>
+    <Modal
+      title="WELCOME!"
+      imgName="pokeball"
+      actions={[
+        {
+          label: 'PLAY',
+          do: () => {
+            alert('PLAY');
+          },
+          index: 0,
+        },
+        {
+          label: 'RESET',
+          do: () => {
+            alert('RESET');
+          },
+          index: 1,
+        },
+      ]}
+    >
       <p>
         <b>The ghost</b> has escaped from the Pokémon Tower, with some other
         pokémons' spirits.

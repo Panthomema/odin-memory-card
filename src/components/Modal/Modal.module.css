@@ -13,14 +13,14 @@
   gap: var(--spacing-lg);
   background: var(--color-bg);
   padding: var(--spacing-lg);
-  max-width: 90vw;
+  max-width: var(--modal-max-w);
   text-align: center;
 }
 
 .title {
   font-size: 1rem;
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
   justify-content: center;
   align-items: center;
 }
@@ -45,5 +45,21 @@
 
 .content p {
   /* Reset nes.css default p styles */
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions input {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.actions label {
+  /* Reset base nes.css label styles */
   margin: 0;
 }

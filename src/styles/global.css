@@ -20,6 +20,7 @@
 @media (orientation: landscape) {
   :root {
     --font-size-base: 10px;
+    --modal-max-w: 85dvw;
   }
 }
 
@@ -27,6 +28,7 @@
 @media (orientation: portrait) {
   :root {
     --font-size-base: 12px;
+    --modal-max-w: 90dvw;
   }
 }
 
@@ -62,6 +64,7 @@
 @media (height > 768px) and (orientation: landscape) {
   :root {
     --font-size-base: 16px;
+    --modal-max-w: 80dvw;
   }
 }
 
@@ -69,6 +72,7 @@
 @media (width > 768px) and (orientation: portrait) {
   :root {
     --font-size-base: 18px;
+    --modal-max-w: 85dvw;
   }
 }
 
@@ -76,13 +80,14 @@
 @media (height > 1024px) and (orientation: landscape) {
   :root {
     --font-size-base: 18px;
+    --modal-max-w: 70dvw;
   }
 }
 
 /* Laptop portrait */
 @media (width > 1024px) and (orientation: portrait) {
   :root {
-    --font-size-base: 20px;
+    --font-size-base: 75px;
   }
 }
 
@@ -90,6 +95,7 @@
 @media (height > 1440px) and (orientation: landscape) {
   :root {
     --font-size-base: 20px;
+    --modal-max-w: 60dvw;
   }
 }
 
@@ -97,6 +103,7 @@
 @media (width > 1440px) and (orientation: portrait) {
   :root {
     --font-size-base: 22px;
+    --modal-max-w: 65dvw;
   }
 }
 
@@ -150,4 +157,14 @@ body {
   border-style: solid;
   border-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAMAAAAPdrEwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAABgQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMM8PuMAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4xLjVkR1hSAAAA5UlEQVRoQ+3MQQrDMBBD0fb+h06N/2A+MTHdTtBbKRpHn0u+UtUf6oepqinTQ1VT62kfyNgbuHcGTaYXmqbT9XXEU6vDUaZvWk/XHxtfn/KOa6YXrk2n/UGGG7K5J8NNpgc3rafBAW7I5p4MGmR6oMFrpvf8xG+ckemV0XraB+czv3RGpldG62n47PzEb5yR6ZXxmmm4IZt7MmiQ6YEGrad9IGNv4N4ZNJleaJpO19cRT60OR5m+aT1df2x8fco7rpleuDad9gcZbsjmngw3mR7ctJ4GB1T1h/phqmrK9FDV1HH6un4ss9jsFZtJkQAAAABJRU5ErkJggg==')
     42 round;
+}
+
+/* Override NES.css radio styles */
+.nes-radio:checked + span::before {
+  animation: blink 1s infinite steps(1);
+}
+
+.nes-radio:checked + span::before,
+.nes-radio:checked:focus + span::before {
+  color: var(--color-text);
 }
