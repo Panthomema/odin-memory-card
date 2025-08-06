@@ -8,11 +8,18 @@
   gap: var(--spacing-md);
   width: 12.5em;
   aspect-ratio: 25/31;
+  cursor: var(--nes-cursor), pointer;
 
   /* Reset nes-container styles */
   margin: 0 !important;
   border-image-repeat: unset !important;
   padding: var(--spacing-md) !important;
+}
+
+.card:focus,
+.card:hover {
+  box-shadow: 0 0 0 4px var(--color-focus);
+  border-radius: inherit; /* importante si el padre tiene border-radius */
 }
 
 .name {
