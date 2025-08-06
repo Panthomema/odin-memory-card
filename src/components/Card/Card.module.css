@@ -16,8 +16,8 @@
   padding: var(--spacing-md) !important;
 }
 
-.card:focus,
-.card:hover {
+.card-selected {
+  transition: box-shadow 0.2s ease;
   box-shadow: 0 0 0 4px var(--color-focus);
   border-radius: inherit; /* importante si el padre tiene border-radius */
 }

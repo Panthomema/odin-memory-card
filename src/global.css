@@ -10,7 +10,7 @@
 :root {
   --color-bg: #fff;
   --color-text: #181010;
-  --color-focus: #cccde5;
+  --color-focus: #ffeb3b;
   --spacing-xs: calc(var(--font-size-base) * 0.25);
   --spacing-sm: calc(var(--font-size-base) * 0.5);
   --spacing-md: calc(var(--font-size-base) * 1);

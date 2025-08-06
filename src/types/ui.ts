@@ -7,7 +7,6 @@ export type PokemonCardData = {
 export type ModalAction = {
   label: string;
   onCommit: () => void;
-  index: number;
 };
 
 export type NavigationIncrement = 1 | 0 | -1;

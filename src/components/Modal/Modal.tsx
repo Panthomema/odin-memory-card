@@ -3,7 +3,7 @@ import styles from '@/components/Modal/Modal.module.css';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 import type { ModalAction } from '@/types/ui';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 type ModalProps = {
   title: string;
@@ -13,14 +13,10 @@ type ModalProps = {
 };
 
 function Modal({ title, imgName, children, actions }: ModalProps) {
-  const selectedIndex = useKeyboardNavigation({
+  const { selectedIndex, setHoveredIndex } = useKeyboardNavigation({
     itemCount: actions.length,
     onEnter: (index) => actions[index].onCommit(),
   });
-
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const displayedIndex = hoveredIndex ?? selectedIndex;
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -56,7 +52,7 @@ function Modal({ title, imgName, children, actions }: ModalProps) {
             <ActionRadio
               key={index}
               label={action.label}
-              checked={displayedIndex === index}
+              checked={selectedIndex === index}
               onClick={action.onCommit}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}

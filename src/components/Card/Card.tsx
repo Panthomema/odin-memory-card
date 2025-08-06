@@ -4,11 +4,31 @@ import clsx from 'clsx';
 
 type CardProps = {
   pokemon: PokemonCardData;
+  isSelected: boolean;
+  onClick: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 };
 
-function Card({ pokemon }: CardProps) {
+function Card({
+  pokemon,
+  isSelected,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+}: CardProps) {
   return (
-    <div className={clsx('nes-container', 'is-rounded', styles.card)}>
+    <div
+      className={clsx(
+        'nes-container',
+        'is-rounded',
+        styles.card,
+        isSelected && styles['card-selected'],
+      )}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <img
         src={pokemon.spriteUrl}
         alt={pokemon.name.toUpperCase()}

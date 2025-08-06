@@ -19,14 +19,12 @@ function App() {
               onCommit: () => {
                 setGameState('playing');
               },
-              index: 0,
             },
             {
               label: 'RESET',
               onCommit: () => {
                 window.location.reload();
               },
-              index: 1,
             },
           ]}
         />

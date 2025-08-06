@@ -10,7 +10,11 @@ export function useKeyboardNavigation({
   itemCount,
   onEnter,
 }: UseKeyboardNavigationOptions) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [keyboardIndex, setKeyboardIndex] = useState(0);
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const selectedIndex = hoveredIndex ?? keyboardIndex;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -20,7 +24,7 @@ export function useKeyboardNavigation({
       else if (e.key === 'ArrowRight') increment = 1;
 
       if (increment !== 0) {
-        setSelectedIndex((prev) => {
+        setKeyboardIndex((prev) => {
           const next = prev + increment;
           if (next < 0 || next >= itemCount) return prev;
           return next as typeof prev;
@@ -28,13 +32,19 @@ export function useKeyboardNavigation({
       }
 
       if (e.key === 'Enter') {
-        onEnter(selectedIndex);
+        onEnter(keyboardIndex);
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [itemCount, onEnter, selectedIndex]);
+  }, [itemCount, onEnter, keyboardIndex]);
 
-  return selectedIndex;
+  return {
+    keyboardIndex,
+    hoveredIndex,
+    selectedIndex,
+    setKeyboardIndex,
+    setHoveredIndex,
+  };
 }
