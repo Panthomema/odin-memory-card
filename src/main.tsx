@@ -3,7 +3,7 @@ import 'nes.css/css/nes.min.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@/App/App.tsx';
-import '@/styles/global.css';
+import '@/global.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
