@@ -17,9 +17,9 @@
 }
 
 .card-selected {
-  transition: box-shadow 0.2s ease;
+  animation: blink-shadow 1s infinite;
   box-shadow: 0 0 0 4px var(--color-focus);
-  border-radius: inherit; /* importante si el padre tiene border-radius */
+  border-radius: inherit; /* Important if father has border-radius */
 }
 
 .name {
@@ -29,4 +29,15 @@
 .image {
   width: var(--image-width);
   height: auto;
+}
+
+@keyframes blink-shadow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  50% {
+    box-shadow: 0 0 0 4px var(--color-focus);
+  }
 }
