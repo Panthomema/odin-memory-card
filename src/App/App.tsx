@@ -1,5 +1,5 @@
 import styles from '@/App/App.module.css';
-import CardGrid from '@/components/CardGrid/CardGrid';
+import Game from '@/components/Game/Game';
 import Scoreboard from '@/components/Scoreboard/Scoreboard';
 import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>('start');
+
   return (
     <>
       {gameState === 'start' && (
@@ -34,7 +35,7 @@ function App() {
         <SfxToggleButton />
       </header>
       <main className={styles.main}>
-        <CardGrid />
+        <Game />
       </main>
       <footer>
         <Scoreboard />

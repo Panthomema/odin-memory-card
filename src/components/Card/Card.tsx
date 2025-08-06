@@ -7,18 +7,15 @@ type CardProps = {
 };
 
 function Card({ pokemon }: CardProps) {
-  const capitalizedName =
-    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-
   return (
     <div className={clsx('nes-container', 'is-rounded', styles.card)}>
       <img
         src={pokemon.spriteUrl}
-        alt={capitalizedName}
+        alt={pokemon.name.toUpperCase()}
         className={styles.image}
         style={{ '--image-width': `${pokemon.scale}%` } as React.CSSProperties}
       />
-      <p className={styles.name}>{capitalizedName}</p>
+      <p className={styles.name}>{pokemon.name.toUpperCase()}</p>
     </div>
   );
 }
