@@ -1,10 +1,7 @@
 import ActionRadio from '@/components/ActionRadio/ActionRadio';
 import styles from '@/components/Modal/Modal.module.css';
-import type {
-  ModalAction,
-  ModalActionIndex,
-  NavigationIncrement,
-} from '@/types/ui';
+import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
+import type { ModalAction } from '@/types/ui';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 
@@ -16,41 +13,20 @@ type ModalProps = {
 };
 
 function Modal({ title, imgName, children, actions }: ModalProps) {
-  const [selectedActionIndex, setSelectedActionIndex] =
-    useState<ModalActionIndex>(0);
+  const selectedIndex = useKeyboardNavigation({
+    itemCount: actions.length,
+    onEnter: (index) => actions[index].onCommit(),
+  });
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const displayedIndex = hoveredIndex ?? selectedActionIndex;
+  const displayedIndex = hoveredIndex ?? selectedIndex;
 
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     modalRef.current?.focus(); // Focus the container to prevent radio problems
   }, []);
-
-  useEffect(() => {
-    const handleNavigate = (increment: NavigationIncrement) => {
-      setSelectedActionIndex((prev) => {
-        const newIndex = prev + increment;
-        if (newIndex === 0 || newIndex === 1) return newIndex;
-        return prev;
-      });
-    };
-
-    const handleEnter = () => {
-      actions[selectedActionIndex].onCommit();
-    };
-
-    const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') handleNavigate(-1);
-      else if (e.key === 'ArrowRight') handleNavigate(1);
-      else if (e.key === 'Enter') handleEnter();
-    };
-
-    document.addEventListener('keydown', handleKeydown);
-
-    return () => document.removeEventListener('keydown', handleKeydown);
-  }, [actions, selectedActionIndex]);
 
   return (
     <div className={styles.overlay}>
