@@ -13,22 +13,23 @@ function Game() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
+  const setupRound = async () => {
+    try {
+      setIsLoaded(false);
+      const ids = getRandomPokemonIds(POKEMON_PER_ROUND);
+      const fetchedData = await fetchPokemonData(ids);
+      const pokemonCardData = await buildPokemonCardData(fetchedData);
+
+      setCardData(pokemonCardData);
+      setIsLoaded(true);
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    }
+  };
+
   useEffect(() => {
-    const setupGame = async () => {
-      try {
-        const ids = getRandomPokemonIds(POKEMON_PER_ROUND);
-        const fetchedData = await fetchPokemonData(ids);
-        const pokemonCardData = await buildPokemonCardData(fetchedData);
-
-        setCardData(pokemonCardData);
-        setIsLoaded(true);
-      } catch (err) {
-        console.error(err);
-        setError(true);
-      }
-    };
-
-    setupGame();
+    setupRound(); // On component mount
   }, []);
 
   if (error) {
@@ -39,7 +40,7 @@ function Game() {
     return <p className="nes-text is-disabled">Loading Pokémon...</p>;
   }
 
-  return <CardGrid cards={cardData} />;
+  return <CardGrid cards={cardData} onCardCommit={setupRound} />;
 }
 
 export default Game;

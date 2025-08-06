@@ -5,14 +5,15 @@ import type { PokemonCardData } from '@/types/ui';
 
 type CardGridProps = {
   cards: PokemonCardData[];
+  onCardCommit: () => void;
 };
 
-function CardGrid({ cards }: CardGridProps) {
+function CardGrid({ cards, onCardCommit }: CardGridProps) {
   console.log(cards);
 
   const { selectedIndex, setHoveredIndex } = useKeyboardNavigation({
     itemCount: cards.length,
-    onEnter: () => {},
+    onEnter: onCardCommit,
   });
 
   return (
@@ -22,7 +23,7 @@ function CardGrid({ cards }: CardGridProps) {
           key={pokemon.name}
           pokemon={pokemon}
           isSelected={selectedIndex == index}
-          onClick={() => {}}
+          onClick={onCardCommit}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
         />
