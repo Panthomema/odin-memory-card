@@ -16,7 +16,8 @@
   padding: var(--spacing-md) !important;
 }
 
-.card-selected {
+.card-selected,
+.card:focus {
   animation: blink-shadow 1s infinite;
   box-shadow: 0 0 0 4px var(--color-focus);
   border-radius: inherit; /* Important if father has border-radius */
@@ -34,10 +35,10 @@
 @keyframes blink-shadow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 transparent;
+    box-shadow: 0 0 0 4px var(--color-focus);
   }
 
   50% {
-    box-shadow: 0 0 0 4px var(--color-focus);
+    box-shadow: 0 0 0 0 transparent;
   }
 }
