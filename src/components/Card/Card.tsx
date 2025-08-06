@@ -5,7 +5,7 @@ import clsx from 'clsx';
 type CardProps = {
   pokemon: PokemonCardData;
   isSelected: boolean;
-  onClick: () => void;
+  onCommit: (id: number) => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 };
@@ -13,7 +13,7 @@ type CardProps = {
 function Card({
   pokemon,
   isSelected,
-  onClick,
+  onCommit,
   onMouseEnter,
   onMouseLeave,
 }: CardProps) {
@@ -25,7 +25,7 @@ function Card({
         styles.card,
         isSelected && styles['card-selected'],
       )}
-      onClick={onClick}
+      onClick={() => onCommit(pokemon.id)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

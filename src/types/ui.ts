@@ -1,4 +1,5 @@
 export type PokemonCardData = {
+  id: number;
   name: string;
   spriteUrl: string;
   scale: number;

@@ -5,7 +5,7 @@ import type { PokemonCardData } from '@/types/ui';
 
 type CardGridProps = {
   cards: PokemonCardData[];
-  onCardCommit: () => void;
+  onCardCommit: (id: number) => void;
 };
 
 function CardGrid({ cards, onCardCommit }: CardGridProps) {
@@ -20,10 +20,10 @@ function CardGrid({ cards, onCardCommit }: CardGridProps) {
     <div className={styles['card-grid']}>
       {cards.map((pokemon, index) => (
         <Card
-          key={pokemon.name}
+          key={pokemon.id}
           pokemon={pokemon}
           isSelected={selectedIndex == index}
-          onClick={onCardCommit}
+          onCommit={onCardCommit}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
         />

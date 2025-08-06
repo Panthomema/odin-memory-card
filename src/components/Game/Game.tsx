@@ -12,6 +12,9 @@ function Game() {
   const [cardData, setCardData] = useState<PokemonCardData[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
+  const [seenPokemonIds, setSeenPokemonIds] = useState<number[]>([]);
+
+  console.log(seenPokemonIds);
 
   const setupRound = async () => {
     try {
@@ -28,6 +31,11 @@ function Game() {
     }
   };
 
+  const handleCardCommit = (id: number) => {
+    setSeenPokemonIds((prev) => [...prev, id]);
+    setupRound();
+  };
+
   useEffect(() => {
     setupRound(); // On component mount
   }, []);
@@ -40,7 +48,7 @@ function Game() {
     return <p className="nes-text is-disabled">Loading Pokémon...</p>;
   }
 
-  return <CardGrid cards={cardData} onCardCommit={setupRound} />;
+  return <CardGrid cards={cardData} onCardCommit={handleCardCommit} />;
 }
 
 export default Game;

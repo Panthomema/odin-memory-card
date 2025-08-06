@@ -47,6 +47,7 @@ export async function buildPokemonCardData(
         const scale = await getSpriteScale(spriteUrl, MAX_SPRITE_WIDTH);
 
         return {
+          id: pokemonData.id,
           name: pokemonData.name,
           spriteUrl,
           scale,
