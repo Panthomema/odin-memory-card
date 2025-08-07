@@ -1,17 +1,48 @@
-import { MAX_SPRITE_WIDTH, POKEMON_IDS } from '@/constants';
+import {
+  GHOST_ID,
+  MAX_SPRITE_WIDTH,
+  POKEMON_IDS,
+  POKEMON_PER_ROUND,
+} from '@/constants';
 import type { PokemonData } from './types/api';
 import type { PokemonCardData } from './types/ui';
 
-// Uses Fisher-Yates algorithm
-export function getRandomPokemonIds(count: number) {
-  const pokemonIds = [...POKEMON_IDS];
+export function getPokemonIds(viewedIds: number[]) {
+  const candidateIds = pickRandomIds(POKEMON_PER_ROUND, POKEMON_IDS);
+  const containsUnviewed = candidateIds.some((id) => !viewedIds.includes(id));
+  const containsGhost = candidateIds.includes(GHOST_ID);
 
-  for (let i = pokemonIds.length - 1; i > 0; i--) {
+  console.log('CANDIDATE IDS', candidateIds);
+
+  if (containsUnviewed || containsGhost) return candidateIds;
+
+  const eligibleIds = [
+    ...new Set([
+      ...POKEMON_IDS.filter((id) => !viewedIds.includes(id)),
+      GHOST_ID,
+    ]),
+  ];
+
+  console.log('SELECTION FORCED', eligibleIds);
+
+  const injectedId = pickRandomIds(1, eligibleIds)[0];
+
+  const replaceIndex = Math.floor(Math.random() * candidateIds.length);
+  candidateIds[replaceIndex] = injectedId;
+
+  return candidateIds;
+}
+
+// Uses Fisher-Yates algorithm
+export function pickRandomIds(count: number, possibleIds: number[]) {
+  const shuffledIds = [...possibleIds];
+
+  for (let i = shuffledIds.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [pokemonIds[i], pokemonIds[j]] = [pokemonIds[j], pokemonIds[i]];
+    [shuffledIds[i], shuffledIds[j]] = [shuffledIds[j], shuffledIds[i]];
   }
 
-  return pokemonIds.slice(0, count);
+  return shuffledIds.slice(0, count);
 }
 
 export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {

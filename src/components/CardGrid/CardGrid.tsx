@@ -9,8 +9,6 @@ type CardGridProps = {
 };
 
 function CardGrid({ cards, onCardCommit }: CardGridProps) {
-  console.log(cards);
-
   const { selectedIndex, setHoveredIndex } = useKeyboardNavigation({
     itemCount: cards.length,
     onEnter: onCardCommit,

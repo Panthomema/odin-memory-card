@@ -1,8 +1,7 @@
-import { POKEMON_PER_ROUND } from '@/constants';
 import {
   buildPokemonCardData,
   fetchPokemonData,
-  getRandomPokemonIds,
+  getPokemonIds,
 } from '@/helpers';
 import type { PokemonCardData } from '@/types/ui';
 import { useEffect, useState } from 'react';
@@ -19,12 +18,10 @@ function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
-  console.log(viewedPokemonIds);
-
   const setupRound = async () => {
     try {
       setIsLoaded(false);
-      const ids = getRandomPokemonIds(POKEMON_PER_ROUND);
+      const ids = getPokemonIds(viewedPokemonIds);
       const fetchedData = await fetchPokemonData(ids);
       const pokemonCardData = await buildPokemonCardData(fetchedData);
 
