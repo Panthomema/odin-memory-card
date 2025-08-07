@@ -1,10 +1,14 @@
 import styles from '@/components/Scoreboard/Scoreboard.module.css';
 import clsx from 'clsx';
 
-function Scoreboard() {
+type ScoreboardProps = {
+  viewedPokemon: number;
+};
+
+function Scoreboard({ viewedPokemon }: ScoreboardProps) {
   return (
     <div className={clsx(styles.scoreboard, 'box')}>
-      <div>Viewed: 0</div>
+      <div>Viewed: {viewedPokemon}</div>
       <div>Captured: 0</div>
     </div>
   );

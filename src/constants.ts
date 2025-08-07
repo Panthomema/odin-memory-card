@@ -2,6 +2,8 @@ export const MAX_SPRITE_WIDTH = 56;
 
 export const POKEMON_PER_ROUND = 6;
 
+export const GHOST_ID = 105;
+
 export const POKEMON_IDS = [
   92, // Gastly
   93, // Haunter

@@ -7,14 +7,19 @@ import {
 import type { PokemonCardData } from '@/types/ui';
 import { useEffect, useState } from 'react';
 import CardGrid from '../CardGrid/CardGrid';
+import { GHOST_ID } from '@/constants';
 
-function Game() {
+type GameProps = {
+  viewedPokemonIds: number[];
+  onPokemonView: (pokemonId: number, ghostId: number) => void;
+};
+
+function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardData, setCardData] = useState<PokemonCardData[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
-  const [seenPokemonIds, setSeenPokemonIds] = useState<number[]>([]);
 
-  console.log(seenPokemonIds);
+  console.log(viewedPokemonIds);
 
   const setupRound = async () => {
     try {
@@ -32,7 +37,7 @@ function Game() {
   };
 
   const handleCardCommit = (id: number) => {
-    setSeenPokemonIds((prev) => [...prev, id]);
+    onPokemonView(id, GHOST_ID);
     setupRound();
   };
 

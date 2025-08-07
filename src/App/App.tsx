@@ -8,6 +8,22 @@ import { useState } from 'react';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>('start');
+  const [viewedPokemonIds, setViewedPokemonIds] = useState<number[]>([]);
+
+  function decideRoundResult(pokemonId: number, ghostId: number) {
+    if (viewedPokemonIds.includes(pokemonId)) {
+      if (pokemonId === ghostId) {
+        setGameState('won');
+      } else {
+        setGameState('lost');
+      }
+    } else {
+      setViewedPokemonIds((prev) => [...prev, pokemonId]);
+    }
+  }
+
+  if (gameState === 'lost') alert('YOU LOSE');
+  if (gameState === 'won') alert('YOU WIN');
 
   return (
     <>
@@ -33,10 +49,13 @@ function App() {
         <SfxToggleButton />
       </header>
       <main className={styles.main}>
-        <Game />
+        <Game
+          viewedPokemonIds={viewedPokemonIds}
+          onPokemonView={decideRoundResult}
+        />
       </main>
       <footer>
-        <Scoreboard />
+        <Scoreboard viewedPokemon={viewedPokemonIds.length} />
       </footer>
     </>
   );
