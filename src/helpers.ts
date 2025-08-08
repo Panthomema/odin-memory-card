@@ -23,8 +23,6 @@ export function getPokemonIds(viewedIds: number[]) {
     ]),
   ];
 
-  console.log('SELECTION FORCED', eligibleIds);
-
   const injectedId = pickRandomIds(1, eligibleIds)[0];
 
   const replaceIndex = Math.floor(Math.random() * candidateIds.length);
@@ -35,14 +33,14 @@ export function getPokemonIds(viewedIds: number[]) {
 
 // Uses Fisher-Yates algorithm
 export function pickRandomIds(count: number, possibleIds: number[]) {
-  const shuffledIds = [...possibleIds];
+  const pool = [...possibleIds];
 
-  for (let i = shuffledIds.length - 1; i > 0; i--) {
+  for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffledIds[i], shuffledIds[j]] = [shuffledIds[j], shuffledIds[i]];
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
 
-  return shuffledIds.slice(0, count);
+  return pool.slice(0, count);
 }
 
 export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {

@@ -4,7 +4,7 @@ import {
   getPokemonIds,
 } from '@/helpers';
 import type { PokemonCardData } from '@/types/ui';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import CardGrid from '../CardGrid/CardGrid';
 import { GHOST_ID } from '@/constants';
 
@@ -18,7 +18,7 @@ function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
-  const setupRound = async () => {
+  const setupRound = useCallback(async () => {
     try {
       setIsLoaded(false);
       const ids = getPokemonIds(viewedPokemonIds);
@@ -31,7 +31,7 @@ function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
       console.error(err);
       setError(true);
     }
-  };
+  }, [viewedPokemonIds]);
 
   const handleCardCommit = (id: number) => {
     onPokemonView(id, GHOST_ID);
@@ -40,7 +40,7 @@ function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
 
   useEffect(() => {
     setupRound(); // On component mount
-  }, []);
+  }, [setupRound]);
 
   if (error) {
     return <p className="nes-text is-error">Error Loading Pokémon</p>;
