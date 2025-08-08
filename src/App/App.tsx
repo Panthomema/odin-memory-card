@@ -5,11 +5,13 @@ import Scoreboard from '@/components/Scoreboard/Scoreboard';
 import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
 import WonGameModal from '@/components/WonGameModal/WonGameModal';
+import { generateGamePool } from '@/helpers';
 import type { GameState } from '@/types/ui';
 import { useState } from 'react';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>('start');
+  const [gamePool, setGamePool] = useState<number[]>(generateGamePool());
   const [viewedPokemonIds, setViewedPokemonIds] = useState<number[]>([]);
   const [capturedGhosts, setCapturedGhosts] = useState(0);
 
@@ -25,6 +27,7 @@ function App() {
     onCommit: () => {
       setGameState('playing');
       setViewedPokemonIds([]);
+      setGamePool(generateGamePool());
     },
   };
 
@@ -70,6 +73,7 @@ function App() {
       </header>
       <main className={styles.main}>
         <Game
+          gamePool={gamePool}
           viewedPokemonIds={viewedPokemonIds}
           onPokemonView={decideRoundResult}
         />

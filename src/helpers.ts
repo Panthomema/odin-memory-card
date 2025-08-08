@@ -1,38 +1,44 @@
 import {
   GHOST_ID,
   MAX_SPRITE_WIDTH,
-  POKEMON_IDS,
+  POKEMON_PER_GAME,
   POKEMON_PER_ROUND,
+  REST_IDS,
+  TOWER_IDS,
 } from '@/constants';
 import type { PokemonData } from './types/api';
 import type { PokemonCardData } from './types/ui';
 
-export function getPokemonIds(viewedIds: number[]) {
-  const candidateIds = pickRandomIds(POKEMON_PER_ROUND, POKEMON_IDS);
-  const containsUnviewed = candidateIds.some((id) => !viewedIds.includes(id));
-  const containsGhost = candidateIds.includes(GHOST_ID);
+export function generateGamePool() {
+  return [
+    ...TOWER_IDS,
+    ...pickRandomIds(REST_IDS, POKEMON_PER_GAME - TOWER_IDS.length),
+  ];
+}
 
-  console.log('CANDIDATE IDS', candidateIds);
+export function getPokemonIds(gamePool: number[], viewedIds: number[]) {
+  console.log(gamePool);
 
-  if (containsUnviewed || containsGhost) return candidateIds;
+  const roundPool = pickRandomIds(gamePool, POKEMON_PER_ROUND);
+  const containsUnviewed = roundPool.some((id) => !viewedIds.includes(id));
+  const containsGhost = roundPool.includes(GHOST_ID);
 
-  const eligibleIds = [
-    ...new Set([
-      ...POKEMON_IDS.filter((id) => !viewedIds.includes(id)),
-      GHOST_ID,
-    ]),
+  if (containsUnviewed || containsGhost) return roundPool;
+
+  const eligiblePool = [
+    ...new Set([...gamePool.filter((id) => !viewedIds.includes(id)), GHOST_ID]),
   ];
 
-  const injectedId = pickRandomIds(1, eligibleIds)[0];
+  const injectedId = pickRandomIds(eligiblePool, 1)[0];
 
-  const replaceIndex = Math.floor(Math.random() * candidateIds.length);
-  candidateIds[replaceIndex] = injectedId;
+  const replaceIndex = Math.floor(Math.random() * gamePool.length);
+  gamePool[replaceIndex] = injectedId;
 
-  return candidateIds;
+  return gamePool;
 }
 
 // Uses Fisher-Yates algorithm
-export function pickRandomIds(count: number, possibleIds: number[]) {
+export function pickRandomIds(possibleIds: number[], count: number) {
   const pool = [...possibleIds];
 
   for (let i = pool.length - 1; i > 0; i--) {

@@ -9,11 +9,12 @@ import CardGrid from '../CardGrid/CardGrid';
 import { GHOST_ID } from '@/constants';
 
 type GameProps = {
+  gamePool: number[];
   viewedPokemonIds: number[];
   onPokemonView: (pokemonId: number, ghostId: number) => void;
 };
 
-function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
+function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardData, setCardData] = useState<PokemonCardData[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -21,7 +22,7 @@ function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
   const setupRound = useCallback(async () => {
     try {
       setIsLoaded(false);
-      const ids = getPokemonIds(viewedPokemonIds);
+      const ids = getPokemonIds(gamePool, viewedPokemonIds);
       const fetchedData = await fetchPokemonData(ids);
       const pokemonCardData = await buildPokemonCardData(fetchedData);
 
