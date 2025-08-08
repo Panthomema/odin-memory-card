@@ -3,13 +3,14 @@ import clsx from 'clsx';
 
 type ScoreboardProps = {
   viewedPokemon: number;
+  capturedGhosts: number;
 };
 
-function Scoreboard({ viewedPokemon }: ScoreboardProps) {
+function Scoreboard({ viewedPokemon, capturedGhosts }: ScoreboardProps) {
   return (
     <div className={clsx(styles.scoreboard, 'box')}>
       <div>Viewed: {viewedPokemon}</div>
-      <div>Captured: 0</div>
+      <div>Captured: {capturedGhosts}</div>
     </div>
   );
 }

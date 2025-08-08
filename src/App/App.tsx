@@ -1,19 +1,45 @@
 import styles from '@/App/App.module.css';
 import Game from '@/components/Game/Game';
+import LostGameModal from '@/components/LostGameModal/LostGameModal';
 import Scoreboard from '@/components/Scoreboard/Scoreboard';
 import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
+import WonGameModal from '@/components/WonGameModal/WonGameModal';
 import type { GameState } from '@/types/ui';
 import { useState } from 'react';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>('start');
   const [viewedPokemonIds, setViewedPokemonIds] = useState<number[]>([]);
+  const [capturedGhosts, setCapturedGhosts] = useState(0);
+
+  const PLAY_ACTION = {
+    label: 'PLAY',
+    onCommit: () => {
+      setGameState('playing');
+    },
+  };
+
+  const PLAY_AGAIN_ACTION = {
+    label: 'PLAY AGAIN',
+    onCommit: () => {
+      setGameState('playing');
+      setViewedPokemonIds([]);
+    },
+  };
+
+  const RESET_ACTION = {
+    label: 'RESET',
+    onCommit: () => {
+      window.location.reload();
+    },
+  };
 
   function decideRoundResult(pokemonId: number, ghostId: number) {
     if (viewedPokemonIds.includes(pokemonId)) {
       if (pokemonId === ghostId) {
         setGameState('won');
+        setCapturedGhosts((prev) => prev + 1);
       } else {
         setGameState('lost');
       }
@@ -22,27 +48,21 @@ function App() {
     }
   }
 
-  if (gameState === 'lost') alert('YOU LOSE');
-  if (gameState === 'won') alert('YOU WIN');
-
   return (
     <>
       {gameState === 'start' && (
-        <WelcomeModal
-          actions={[
-            {
-              label: 'PLAY',
-              onCommit: () => {
-                setGameState('playing');
-              },
-            },
-            {
-              label: 'RESET',
-              onCommit: () => {
-                window.location.reload();
-              },
-            },
-          ]}
+        <WelcomeModal actions={[PLAY_ACTION, RESET_ACTION]} />
+      )}
+      {gameState === 'lost' && (
+        <LostGameModal
+          actions={[PLAY_AGAIN_ACTION, RESET_ACTION]}
+          viewedPokemon={viewedPokemonIds.length}
+        />
+      )}
+      {gameState === 'won' && (
+        <WonGameModal
+          actions={[PLAY_AGAIN_ACTION, RESET_ACTION]}
+          viewedPokemon={viewedPokemonIds.length}
         />
       )}
       <header className={styles.header}>
@@ -55,7 +75,10 @@ function App() {
         />
       </main>
       <footer>
-        <Scoreboard viewedPokemon={viewedPokemonIds.length} />
+        <Scoreboard
+          viewedPokemon={viewedPokemonIds.length}
+          capturedGhosts={capturedGhosts}
+        />
       </footer>
     </>
   );

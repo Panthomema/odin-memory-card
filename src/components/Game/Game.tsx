@@ -35,7 +35,6 @@ function Game({ viewedPokemonIds, onPokemonView }: GameProps) {
 
   const handleCardCommit = (id: number) => {
     onPokemonView(id, GHOST_ID);
-    setupRound();
   };
 
   useEffect(() => {

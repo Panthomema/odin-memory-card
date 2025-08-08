@@ -13,7 +13,8 @@
   gap: var(--spacing-lg);
   background: var(--color-bg);
   padding: var(--spacing-lg);
-  max-width: var(--modal-max-w);
+  width: var(--modal-w);
+  max-width: 1280px;
   text-align: center;
 }
 

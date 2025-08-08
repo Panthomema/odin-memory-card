@@ -3,21 +3,22 @@ import type { ModalAction } from '@/types/ui';
 
 type LostGameModalProps = {
   actions: [ModalAction, ModalAction];
+  viewedPokemon: number;
 };
 
-function LostGameModal({ actions }: LostGameModalProps) {
+function LostGameModal({ actions, viewedPokemon }: LostGameModalProps) {
   return (
-    <Modal title="YOU LOSE!" imgName="pokeball" actions={actions}>
+    <Modal title="GAME OVER!" imgName="ghost" actions={actions}>
       <p>
-        <b>The ghost</b> has escaped from the Pokémon Tower, with some other
-        pokémons' spirits.
+        The ghost has <b>escaped</b> once again, leaving you <b>haunted</b> in
+        the darkness of the Pokémon Tower...
       </p>
       <p>
-        Your mission is to <b>capture</b> it by clicking on it <b>2 times</b>!
+        You managed to encounter <b>{viewedPokemon}</b> different <b>Pokémon</b>{' '}
+        before your fate was sealed.
       </p>
       <p>
-        You only have one pokéball, so if you try to <b>capture</b>
-        anything that <b>isn't</b> the ghost, it will <b>haunt</b> you!
+        Dare to try again, trainer? The spirits are still <b>waiting</b>...
       </p>
     </Modal>
   );
