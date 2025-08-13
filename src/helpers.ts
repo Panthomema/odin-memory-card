@@ -17,8 +17,6 @@ export function generateGamePool() {
 }
 
 export function getPokemonIds(gamePool: number[], viewedIds: number[]) {
-  console.log(gamePool);
-
   const roundPool = pickRandomIds(gamePool, POKEMON_PER_ROUND);
   const containsUnviewed = roundPool.some((id) => !viewedIds.includes(id));
   const containsGhost = roundPool.includes(GHOST_ID);
@@ -31,10 +29,10 @@ export function getPokemonIds(gamePool: number[], viewedIds: number[]) {
 
   const injectedId = pickRandomIds(eligiblePool, 1)[0];
 
-  const replaceIndex = Math.floor(Math.random() * gamePool.length);
-  gamePool[replaceIndex] = injectedId;
+  const replaceIndex = Math.floor(Math.random() * roundPool.length);
+  roundPool[replaceIndex] = injectedId;
 
-  return gamePool;
+  return roundPool;
 }
 
 // Uses Fisher-Yates algorithm
@@ -53,7 +51,10 @@ export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {
   const responses = await Promise.all(
     ids.map(async (id) => {
       try {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const res = await fetchWithTimeout(
+          `https://pokeapi.co/api/v2/pokemon/${id}`,
+          15000,
+        );
         if (!res.ok) throw new Error(`Failed to fetch Pokémon ID ${id}`);
         return res.json();
       } catch (err) {
@@ -106,4 +107,19 @@ async function getSpriteScale(
   });
 
   return (naturalWidth / maxSpriteWidth) * 100;
+}
+
+async function fetchWithTimeout(url: string, timeout = 5000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(id);
+    return res;
+  } catch (err) {
+    console.error(`Fetch failed for ${url}:`, err);
+    clearTimeout(id);
+    throw err;
+  }
 }
