@@ -5,7 +5,6 @@ import Scoreboard from '@/components/Scoreboard/Scoreboard';
 import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
 import WonGameModal from '@/components/WonGameModal/WonGameModal';
-import { RESET_ACTION } from '@/constants';
 import { generateGamePool } from '@/helpers';
 import type { GameState, ModalAction } from '@/types/ui';
 import { useState } from 'react';
@@ -29,6 +28,13 @@ function App() {
       setGameState('playing');
       setViewedPokemonIds([]);
       setGamePool(generateGamePool());
+    },
+  };
+
+  const RESET_ACTION: ModalAction = {
+    label: 'RESET',
+    onCommit: () => {
+      window.location.reload();
     },
   };
 
