@@ -1,3 +1,7 @@
+import CardGrid from '@/components/CardGrid/CardGrid';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import Loading from '@/components/Loading/Loading';
+import { GHOST_ID } from '@/constants';
 import {
   buildPokemonCardData,
   fetchPokemonData,
@@ -5,9 +9,6 @@ import {
 } from '@/helpers';
 import type { ModalAction, PokemonCardData } from '@/types/ui';
 import { useCallback, useEffect, useState } from 'react';
-import CardGrid from '@/components/CardGrid/CardGrid';
-import { GHOST_ID, RESET_ACTION } from '@/constants';
-import ErrorModal from '@/components/ErrorModal/ErrorModal';
 
 type GameProps = {
   gamePool: number[];
@@ -18,11 +19,22 @@ type GameProps = {
 function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardData, setCardData] = useState<PokemonCardData[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
   const RETRY_ACTION: ModalAction = {
     label: 'RETRY',
-    onCommit: () => {},
+    onCommit: () => {
+      console.log('retry');
+      setError(false);
+      setupRound();
+    },
+  };
+
+  const RESET_ACTION: ModalAction = {
+    label: 'RESET',
+    onCommit: () => {
+      window.location.reload();
+    },
   };
 
   const setupRound = useCallback(async () => {
@@ -50,9 +62,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
 
   if (error) return <ErrorModal actions={[RETRY_ACTION, RESET_ACTION]} />;
 
-  if (!isLoaded) {
-    return <p className="nes-text is-disabled">Loading Pokémon...</p>;
-  }
+  if (!isLoaded) return <Loading />;
 
   return <CardGrid cards={cardData} onCardCommit={handleCardCommit} />;
 }
