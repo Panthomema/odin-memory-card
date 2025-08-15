@@ -1,3 +1,4 @@
+import pokeballIcon from '@/assets/icons/pokeball.svg';
 import Modal from '@/components/Modal/Modal';
 import type { ModalAction } from '@/types/ui';
 
@@ -8,7 +9,11 @@ type WonGameModalProps = {
 
 function WonGameModal({ actions, viewedPokemon }: WonGameModalProps) {
   return (
-    <Modal title="CONGRATULATIONS!" imgName="pokeball" actions={actions}>
+    <Modal
+      title="CONGRATULATIONS!"
+      icon={{ src: pokeballIcon, name: 'Pokéball' }}
+      actions={actions}
+    >
       <p>
         You have sucessfully <b>captured the ghost</b>, bringing peace back to
         the Pokémon Tower.

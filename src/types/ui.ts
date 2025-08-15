@@ -5,6 +5,11 @@ export type PokemonCardData = {
   scale: number;
 };
 
+export type ModalIcon = {
+  src: string;
+  name: string;
+};
+
 export type ModalAction = {
   label: string;
   onCommit: () => void;

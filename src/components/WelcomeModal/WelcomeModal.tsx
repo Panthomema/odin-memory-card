@@ -1,3 +1,4 @@
+import professorOakIcon from '@/assets/icons/professor-oak.svg';
 import Modal from '@/components/Modal/Modal';
 import type { ModalAction } from '@/types/ui';
 
@@ -7,7 +8,11 @@ type WelcomeModalProps = {
 
 function WelcomeModal({ actions }: WelcomeModalProps) {
   return (
-    <Modal title="WELCOME!" imgName="professor-oak" actions={actions}>
+    <Modal
+      title="WELCOME!"
+      icon={{ src: professorOakIcon, name: 'Professor Oak' }}
+      actions={actions}
+    >
       <p>
         <b>The ghost</b> has escaped from the Pokémon Tower, with some other
         pokémons' spirits.

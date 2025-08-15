@@ -1,18 +1,18 @@
 import ActionRadio from '@/components/ActionRadio/ActionRadio';
 import styles from '@/components/Modal/Modal.module.css';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
-import type { ModalAction } from '@/types/ui';
+import type { ModalAction, ModalIcon } from '@/types/ui';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 
 type ModalProps = {
   title: string;
-  imgName: string;
+  icon: ModalIcon;
   children: React.ReactNode;
   actions: [ModalAction, ModalAction];
 };
 
-function Modal({ title, imgName, children, actions }: ModalProps) {
+function Modal({ title, icon, children, actions }: ModalProps) {
   const { selectedIndex, setHoveredIndex } = useKeyboardNavigation({
     itemCount: actions.length,
     onEnter: (index) => actions[index].onCommit(),
@@ -34,17 +34,9 @@ function Modal({ title, imgName, children, actions }: ModalProps) {
         ref={modalRef}
       >
         <div className={clsx('nes-text', styles.title)}>
-          <img
-            src={`/icons/${imgName}.svg`}
-            alt={imgName}
-            className={styles.icon}
-          />
+          <img src={icon.src} alt={icon.name} className={styles.icon} />
           <h1>{title}</h1>
-          <img
-            src={`/icons/${imgName}.svg`}
-            alt={imgName}
-            className={styles.icon}
-          />
+          <img src={icon.src} alt={icon.name} className={styles.icon} />
         </div>
         <div className={styles.content}>{children}</div>
         <div className={styles.actions}>
