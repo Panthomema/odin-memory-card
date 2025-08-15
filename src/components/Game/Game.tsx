@@ -5,7 +5,7 @@ import { GHOST_ID } from '@/constants';
 import {
   buildPokemonCardData,
   fetchPokemonData,
-  getPokemonIds,
+  generateRoundPool,
 } from '@/helpers';
 import type { ModalAction, PokemonCardData } from '@/types/ui';
 import { useCallback, useEffect, useState } from 'react';
@@ -40,7 +40,8 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const setupRound = useCallback(async () => {
     try {
       setIsLoaded(false);
-      const ids = getPokemonIds(gamePool, viewedPokemonIds);
+      const ids = generateRoundPool(gamePool, viewedPokemonIds);
+      console.log(ids);
       const fetchedData = await fetchPokemonData(ids);
       const pokemonCardData = await buildPokemonCardData(fetchedData);
 
@@ -49,6 +50,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
     } catch (err) {
       console.error(err);
       setError(true);
+      /* setIsLoaded(true); */
     }
   }, [gamePool, viewedPokemonIds]);
 

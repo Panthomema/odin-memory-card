@@ -9,6 +9,7 @@ import {
 import type { PokemonData } from './types/api';
 import type { PokemonCardData } from './types/ui';
 
+// Game & round pool generation
 export function generateGamePool() {
   return [
     ...TOWER_IDS,
@@ -16,7 +17,7 @@ export function generateGamePool() {
   ];
 }
 
-export function getPokemonIds(gamePool: number[], viewedIds: number[]) {
+export function generateRoundPool(gamePool: number[], viewedIds: number[]) {
   const roundPool = pickRandomIds(gamePool, POKEMON_PER_ROUND);
   const containsUnviewed = roundPool.some((id) => !viewedIds.includes(id));
   const containsGhost = roundPool.includes(GHOST_ID);
@@ -36,7 +37,7 @@ export function getPokemonIds(gamePool: number[], viewedIds: number[]) {
 }
 
 // Uses Fisher-Yates algorithm
-export function pickRandomIds(possibleIds: number[], count: number) {
+function pickRandomIds(possibleIds: number[], count: number) {
   const pool = [...possibleIds];
 
   for (let i = pool.length - 1; i > 0; i--) {
@@ -47,6 +48,7 @@ export function pickRandomIds(possibleIds: number[], count: number) {
   return pool.slice(0, count);
 }
 
+// Pokemon data fetching
 export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {
   const responses = await Promise.all(
     ids.map(async (id) => {
@@ -55,6 +57,7 @@ export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {
           `https://pokeapi.co/api/v2/pokemon/${id}`,
           15000,
         );
+        console.log(`RESPONSE FOR ${id}:`, res);
         if (!res.ok) throw new Error(`Failed to fetch Pokémon ID ${id}`);
         return res.json();
       } catch (err) {
@@ -67,6 +70,22 @@ export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {
   return responses;
 }
 
+async function fetchWithTimeout(url: string, timeout = 5000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(id);
+    return res;
+  } catch (err) {
+    console.error(`Fetch failed for ${url}:`, err);
+    clearTimeout(id);
+    throw err;
+  }
+}
+
+// Card data building & image preloading
 export async function buildPokemonCardData(
   data: PokemonData[],
 ): Promise<PokemonCardData[]> {
@@ -75,7 +94,8 @@ export async function buildPokemonCardData(
       try {
         const spriteUrl =
           pokemonData.sprites.versions?.['generation-i'].yellow.front_default ??
-          pokemonData.sprites.front_default;
+          pokemonData.sprites.versions?.['generation-i']['red-blue']
+            .front_default;
 
         if (!spriteUrl)
           throw new Error(`Unavailable sprite for ${pokemonData.name}`);
@@ -100,26 +120,13 @@ async function getSpriteScale(
   spriteUrl: string,
   maxSpriteWidth: number,
 ): Promise<number> {
-  const naturalWidth = await new Promise<number>((resolve) => {
+  const naturalWidth = await new Promise<number>((resolve, reject) => {
     const img = new Image();
     img.onload = () => resolve(img.naturalWidth);
+    img.onerror = () =>
+      reject(new Error(`Failed to preload image: ${spriteUrl}`));
     img.src = spriteUrl;
   });
 
   return (naturalWidth / maxSpriteWidth) * 100;
-}
-
-async function fetchWithTimeout(url: string, timeout = 5000) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-
-  try {
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(id);
-    return res;
-  } catch (err) {
-    console.error(`Fetch failed for ${url}:`, err);
-    clearTimeout(id);
-    throw err;
-  }
 }
