@@ -1,4 +1,4 @@
-import ghostIcon from '@/assets/icons/ghost.svg';
+import GhostIcon from '@/assets/icons/ghost.svg?react';
 import Modal from '@/components/Modal/Modal';
 import type { ModalAction } from '@/types/ui';
 
@@ -9,11 +9,7 @@ type LostGameModalProps = {
 
 function LostGameModal({ actions, viewedPokemon }: LostGameModalProps) {
   return (
-    <Modal
-      title="GAME OVER!"
-      icon={{ src: ghostIcon, name: 'Ghost' }}
-      actions={actions}
-    >
+    <Modal title="GAME OVER!" Icon={GhostIcon} actions={actions}>
       <p>
         The ghost has <b>escaped</b> once again, leaving you <b>haunted</b> in
         the darkness of the Pokémon Tower...

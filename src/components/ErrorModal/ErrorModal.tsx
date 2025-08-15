@@ -1,6 +1,6 @@
 import Modal from '@/components/Modal/Modal';
 import type { ModalAction } from '@/types/ui';
-import pokedexIcon from '@/assets/icons/pokedex.svg';
+import PokedexIcon from '@/assets/icons/pokedex.svg?react';
 
 type ErrorModalProps = {
   actions: [ModalAction, ModalAction];
@@ -8,11 +8,7 @@ type ErrorModalProps = {
 
 function ErrorModal({ actions }: ErrorModalProps) {
   return (
-    <Modal
-      title="ERROR"
-      icon={{ src: pokedexIcon, name: 'Pokédex' }}
-      actions={actions}
-    >
+    <Modal title="ERROR" Icon={PokedexIcon} actions={actions}>
       <p>
         <b>Oh no!</b> The Pokédex connection was lost while tracking the ghost.
       </p>
