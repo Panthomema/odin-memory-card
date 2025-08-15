@@ -19,7 +19,7 @@ function LostGameModal({ actions, viewedPokemon }: LostGameModalProps) {
         before your fate was sealed.
       </p>
       <p>
-        Dare to try again, trainer? The spirits are still <b>waiting</b>...
+        Dare to try again? The spirits are still <b>waiting</b>...
       </p>
     </Modal>
   );
