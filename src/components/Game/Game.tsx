@@ -2,8 +2,8 @@ import CardGrid from '@/components/CardGrid/CardGrid';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loading from '@/components/Loading/Loading';
 import { GHOST_ID } from '@/constants';
-import { generateRoundPool } from '@/helpers/game';
 import { getPokemonCards } from '@/helpers/api';
+import { generateRoundPool } from '@/helpers/game';
 
 import type { ModalAction, PokemonCardData } from '@/types/ui';
 import { useCallback, useEffect, useState } from 'react';

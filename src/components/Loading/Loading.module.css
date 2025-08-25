@@ -1,0 +1,10 @@
+.bar {
+  box-shadow: 0 0 0 0.1px var(--color-bg);
+  width: var(--bar-w);
+  aspect-ratio: 12 / 1;
+
+  /* Reset nes-container styles */
+  height: unset;
+  margin: 0 !important;
+  border-image-repeat: unset !important;
+}
