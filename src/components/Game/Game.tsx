@@ -2,9 +2,8 @@ import CardGrid from '@/components/CardGrid/CardGrid';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loading from '@/components/Loading/Loading';
 import { GHOST_ID } from '@/constants';
-import { fetchPokemonData } from '@/helpers/api';
 import { generateRoundPool } from '@/helpers/game';
-import { buildPokemonCardData } from '@/helpers/ui';
+import { getPokemonCards } from '@/helpers/api';
 
 import type { ModalAction, PokemonCardData } from '@/types/ui';
 import { useCallback, useEffect, useState } from 'react';
@@ -39,8 +38,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
     try {
       setIsLoaded(false);
       const ids = generateRoundPool(gamePool, viewedPokemonIds);
-      const fetchedData = await fetchPokemonData(ids);
-      const pokemonCardData = await buildPokemonCardData(fetchedData);
+      const pokemonCardData = await getPokemonCards(ids);
 
       setCardData(pokemonCardData);
       setIsLoaded(true);
