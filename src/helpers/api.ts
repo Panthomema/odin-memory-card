@@ -1,16 +1,24 @@
 import type { PokemonData } from '@/types/api';
+import { getCachedPokemon, setCachedPokemon } from '@/helpers/cache';
 
 export async function fetchPokemonData(ids: number[]): Promise<PokemonData[]> {
   const responses = await Promise.all(
     ids.map(async (id) => {
+      const cached = getCachedPokemon(id);
+
+      if (cached) return cached;
+
       try {
         const res = await fetchWithTimeout(
           `https://pokeapi.co/api/v2/pokemon/${id}`,
           15000,
         );
-        console.log(`RESPONSE FOR ${id}:`, res);
+
         if (!res.ok) throw new Error(`Failed to fetch Pokémon ID ${id}`);
-        return res.json();
+
+        const data: PokemonData = await res.json();
+        setCachedPokemon(id, data);
+        return data;
       } catch (err) {
         console.error(err);
         throw new Error('Error obtaining pokémon data');

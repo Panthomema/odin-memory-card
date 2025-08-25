@@ -1,29 +1,35 @@
 import { MAX_SPRITE_WIDTH } from '@/constants';
 import type { PokemonData } from '@/types/api';
 import type { PokemonCardData } from '@/types/ui';
+import { getCachedCard, setCachedCard } from '@/helpers/cache';
 
 export async function buildPokemonCardData(
   data: PokemonData[],
 ): Promise<PokemonCardData[]> {
   return Promise.all(
     data.map(async (pokemonData) => {
+      const { id, name, sprites } = pokemonData;
+      const cached = getCachedCard(id);
+
+      if (cached) return cached;
+
       try {
         const spriteUrl =
-          pokemonData.sprites.versions?.['generation-i'].yellow.front_default ??
-          pokemonData.sprites.versions?.['generation-i']['red-blue']
-            .front_default;
+          sprites.versions?.['generation-i'].yellow.front_default ??
+          sprites.versions?.['generation-i']['red-blue'].front_default;
 
-        if (!spriteUrl)
-          throw new Error(`Unavailable sprite for ${pokemonData.name}`);
+        if (!spriteUrl) throw new Error(`Unavailable sprite for ${name}`);
 
         const scale = await getSpriteScale(spriteUrl, MAX_SPRITE_WIDTH);
 
-        return {
-          id: pokemonData.id,
-          name: pokemonData.name,
+        const cardData = {
+          id,
+          name,
           spriteUrl,
           scale,
         };
+        setCachedCard(id, cardData);
+        return cardData;
       } catch (err) {
         console.error(err);
         throw new Error('Error building card data');

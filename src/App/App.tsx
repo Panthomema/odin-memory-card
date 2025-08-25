@@ -5,7 +5,7 @@ import Scoreboard from '@/components/Scoreboard/Scoreboard';
 import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
 import WonGameModal from '@/components/WonGameModal/WonGameModal';
-import { generateGamePool } from '@/helpers';
+import { generateGamePool } from '@/helpers/game';
 import type { GameState, ModalAction } from '@/types/ui';
 import { useState } from 'react';
 

@@ -23,7 +23,6 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const RETRY_ACTION: ModalAction = {
     label: 'RETRY',
     onCommit: () => {
-      console.log('retry');
       setError(false);
       setupRound();
     },
@@ -40,7 +39,6 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
     try {
       setIsLoaded(false);
       const ids = generateRoundPool(gamePool, viewedPokemonIds);
-      console.log(ids);
       const fetchedData = await fetchPokemonData(ids);
       const pokemonCardData = await buildPokemonCardData(fetchedData);
 
