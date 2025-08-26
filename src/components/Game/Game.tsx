@@ -17,7 +17,7 @@ type GameProps = {
 
 function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardData, setCardData] = useState<PokemonCardData[]>([]);
-  const [roundState, setRoundState] = useState<RoundState>('error');
+  const [roundState, setRoundState] = useState<RoundState>('loading');
 
   const RETRY_ACTION: ModalAction = {
     label: 'RETRY',

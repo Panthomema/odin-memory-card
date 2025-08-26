@@ -28,9 +28,9 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
   };
 
   const modalVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.8 },
+    hidden: { scale: 0.7, x: '-50%', y: '-50%', opacity: 0 },
+    visible: { scale: 1, x: '-50%', y: '-50%', opacity: 1 },
+    exit: { scale: 0.7, x: '-50%', y: '-50%', opacity: 0 },
   };
 
   useEffect(() => {
@@ -38,14 +38,15 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
   }, []);
 
   return (
-    <motion.div
-      className={styles.overlay}
-      variants={overlayVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      transition={{ duration: 1 }}
-    >
+    <>
+      <motion.div
+        className={styles.overlay}
+        variants={overlayVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        transition={{ duration: 0.2 }}
+      ></motion.div>
       <motion.div
         className={clsx(styles.modal, 'box')}
         role="dialog"
@@ -56,7 +57,7 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
         initial="hidden"
         animate="visible"
         exit="exit"
-        transition={{ duration: 1, ease: 'easeOut' }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
         <div className={clsx('nes-text', styles.title)}>
           <Icon className={styles.icon} />
@@ -77,7 +78,7 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
           ))}
         </div>
       </motion.div>
-    </motion.div>
+    </>
   );
 }
 
