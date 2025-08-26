@@ -19,6 +19,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "modern-normalize": "^3.0.1",
+    "motion": "^12.23.12",
     "nes.css": "^2.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
