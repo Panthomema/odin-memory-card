@@ -21,18 +21,6 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const overlayVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
-
-  const modalVariants = {
-    hidden: { scale: 0.7, x: '-50%', y: '-50%', opacity: 0 },
-    visible: { scale: 1, x: '-50%', y: '-50%', opacity: 1 },
-    exit: { scale: 0.7, x: '-50%', y: '-50%', opacity: 0 },
-  };
-
   useEffect(() => {
     modalRef.current?.focus(); // Focus the container to prevent radio problems
   }, []);
@@ -41,10 +29,9 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
     <>
       <motion.div
         className={styles.overlay}
-        variants={overlayVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       ></motion.div>
       <motion.div
@@ -53,10 +40,9 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
         aria-modal="true"
         tabIndex={-1}
         ref={modalRef}
-        variants={modalVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+        initial={{ scale: 0.7, x: '-50%', y: '-50%', opacity: 0 }}
+        animate={{ scale: 1, x: '-50%', y: '-50%', opacity: 1 }}
+        exit={{ scale: 0.7, x: '-50%', y: '-50%', opacity: 0 }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
         <div className={clsx('nes-text', styles.title)}>
