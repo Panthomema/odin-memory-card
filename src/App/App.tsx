@@ -71,24 +71,26 @@ function App() {
           />
         )}
       </AnimatePresence>
-      <header className={styles.header}>
-        <SfxToggleButton />
-      </header>
-      <main className={styles.main}>
-        {gameState === 'playing' && (
-          <Game
-            gamePool={gamePool}
-            viewedPokemonIds={viewedPokemonIds}
-            onPokemonView={decideRoundResult}
-          />
-        )}
-      </main>
-      <footer>
-        <Scoreboard
-          viewedPokemon={viewedPokemonIds.length}
-          capturedGhosts={capturedGhosts}
-        />
-      </footer>
+      {gameState === 'playing' && (
+        <>
+          <header className={styles.header}>
+            <SfxToggleButton />
+          </header>
+          <main className={styles.main}>
+            <Game
+              gamePool={gamePool}
+              viewedPokemonIds={viewedPokemonIds}
+              onPokemonView={decideRoundResult}
+            />
+          </main>
+          <footer>
+            <Scoreboard
+              viewedPokemon={viewedPokemonIds.length}
+              capturedGhosts={capturedGhosts}
+            />
+          </footer>
+        </>
+      )}
     </>
   );
 }
