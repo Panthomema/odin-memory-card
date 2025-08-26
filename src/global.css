@@ -26,7 +26,7 @@
   :root {
     --font-size-base: 10px;
     --modal-w: 80dvw;
-    --bar-w: 40%;
+    --bar-w: 40dvw;
   }
 }
 
@@ -35,7 +35,7 @@
   :root {
     --font-size-base: 12px;
     --modal-w: 90dvw;
-    --bar-w: 80%;
+    --bar-w: 80dvw;
   }
 }
 
