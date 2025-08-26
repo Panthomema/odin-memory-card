@@ -75,11 +75,13 @@ function App() {
         <SfxToggleButton />
       </header>
       <main className={styles.main}>
-        <Game
-          gamePool={gamePool}
-          viewedPokemonIds={viewedPokemonIds}
-          onPokemonView={decideRoundResult}
-        />
+        {gameState === 'playing' && (
+          <Game
+            gamePool={gamePool}
+            viewedPokemonIds={viewedPokemonIds}
+            onPokemonView={decideRoundResult}
+          />
+        )}
       </main>
       <footer>
         <Scoreboard

@@ -5,7 +5,8 @@ import { GHOST_ID } from '@/constants';
 import { getPokemonCards } from '@/helpers/api';
 import { generateRoundPool } from '@/helpers/game';
 
-import type { ModalAction, PokemonCardData } from '@/types/ui';
+import type { ModalAction, PokemonCardData, RoundState } from '@/types/ui';
+import { AnimatePresence } from 'motion/react';
 import { useCallback, useEffect, useState } from 'react';
 
 type GameProps = {
@@ -16,13 +17,11 @@ type GameProps = {
 
 function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardData, setCardData] = useState<PokemonCardData[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const [roundState, setRoundState] = useState<RoundState>('error');
 
   const RETRY_ACTION: ModalAction = {
     label: 'RETRY',
     onCommit: () => {
-      setError(false);
       setupRound();
     },
   };
@@ -36,15 +35,15 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
 
   const setupRound = useCallback(async () => {
     try {
-      setIsLoaded(false);
+      setRoundState('loading');
       const ids = generateRoundPool(gamePool, viewedPokemonIds);
       const pokemonCardData = await getPokemonCards(ids);
 
       setCardData(pokemonCardData);
-      setIsLoaded(true);
+      setRoundState('ready');
     } catch (err) {
       console.error(err);
-      setError(true);
+      setRoundState('error');
     }
   }, [gamePool, viewedPokemonIds]);
 
@@ -56,11 +55,19 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
     setupRound(); // On component mount
   }, [setupRound]);
 
-  if (error) return <ErrorModal actions={[RETRY_ACTION, RESET_ACTION]} />;
-
-  if (!isLoaded) return <Loading />;
-
-  return <CardGrid cards={cardData} onCardCommit={handleCardCommit} />;
+  return (
+    <>
+      <AnimatePresence mode="wait">
+        {roundState === 'error' && (
+          <ErrorModal actions={[RETRY_ACTION, RESET_ACTION]} />
+        )}
+      </AnimatePresence>
+      {roundState === 'loading' && <Loading />}
+      {roundState === 'ready' && (
+        <CardGrid cards={cardData} onCardCommit={handleCardCommit} />
+      )}
+    </>
+  );
 }
 
 export default Game;

@@ -13,3 +13,5 @@ export type ModalAction = {
 export type NavigationIncrement = 1 | 0 | -1;
 
 export type GameState = 'start' | 'playing' | 'won' | 'lost';
+
+export type RoundState = 'loading' | 'ready' | 'error';

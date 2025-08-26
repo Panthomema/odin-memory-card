@@ -44,7 +44,7 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 1 }}
     >
       <motion.div
         className={clsx(styles.modal, 'box')}
@@ -56,7 +56,7 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
         initial="hidden"
         animate="visible"
         exit="exit"
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 1, ease: 'easeOut' }}
       >
         <div className={clsx('nes-text', styles.title)}>
           <Icon className={styles.icon} />
