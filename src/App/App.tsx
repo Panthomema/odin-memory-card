@@ -7,6 +7,7 @@ import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
 import WonGameModal from '@/components/WonGameModal/WonGameModal';
 import { generateGamePool } from '@/helpers/game';
 import type { GameState, ModalAction } from '@/types/ui';
+import { AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 
 function App() {
@@ -53,21 +54,23 @@ function App() {
 
   return (
     <>
-      {gameState === 'start' && (
-        <WelcomeModal actions={[PLAY_ACTION, RESET_ACTION]} />
-      )}
-      {gameState === 'lost' && (
-        <LostGameModal
-          actions={[PLAY_AGAIN_ACTION, RESET_ACTION]}
-          viewedPokemon={viewedPokemonIds.length}
-        />
-      )}
-      {gameState === 'won' && (
-        <WonGameModal
-          actions={[PLAY_AGAIN_ACTION, RESET_ACTION]}
-          viewedPokemon={viewedPokemonIds.length}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {gameState === 'start' && (
+          <WelcomeModal actions={[PLAY_ACTION, RESET_ACTION]} />
+        )}
+        {gameState === 'lost' && (
+          <LostGameModal
+            actions={[PLAY_AGAIN_ACTION, RESET_ACTION]}
+            viewedPokemon={viewedPokemonIds.length}
+          />
+        )}
+        {gameState === 'won' && (
+          <WonGameModal
+            actions={[PLAY_AGAIN_ACTION, RESET_ACTION]}
+            viewedPokemon={viewedPokemonIds.length}
+          />
+        )}
+      </AnimatePresence>
       <header className={styles.header}>
         <SfxToggleButton />
       </header>

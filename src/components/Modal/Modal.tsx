@@ -3,6 +3,7 @@ import styles from '@/components/Modal/Modal.module.css';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 import type { ModalAction } from '@/types/ui';
 import clsx from 'clsx';
+import { motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
 
 type ModalProps = {
@@ -20,18 +21,42 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.8 },
+  };
+
   useEffect(() => {
     modalRef.current?.focus(); // Focus the container to prevent radio problems
   }, []);
 
   return (
-    <div className={styles.overlay}>
-      <div
+    <motion.div
+      className={styles.overlay}
+      variants={overlayVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div
         className={clsx(styles.modal, 'box')}
         role="dialog"
         aria-modal="true"
         tabIndex={-1}
         ref={modalRef}
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        transition={{ duration: 0.3, ease: 'easeOut' }}
       >
         <div className={clsx('nes-text', styles.title)}>
           <Icon className={styles.icon} />
@@ -51,8 +76,8 @@ function Modal({ title, Icon, children, actions }: ModalProps) {
             />
           ))}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
