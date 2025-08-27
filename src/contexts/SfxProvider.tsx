@@ -22,10 +22,12 @@ function SfxProvider({ children }: SfxProviderProps) {
   );
 
   const toggleSfx = () => {
+    sounds.action.play();
     setSfxEnabled((prev) => !prev);
   };
 
   const playActionSfx = () => {
+    if (!sfxEnabled) return;
     sounds.action.play();
   };
 

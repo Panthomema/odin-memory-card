@@ -6,17 +6,12 @@ import clsx from 'clsx';
 import { useContext } from 'react';
 
 function SfxToggleButton() {
-  const { sfxEnabled, toggleSfx, playActionSfx } = useContext(SfxContext);
-
-  const handleAction = () => {
-    playActionSfx();
-    toggleSfx();
-  };
+  const { sfxEnabled, toggleSfx } = useContext(SfxContext);
 
   return (
     <button
       className={clsx('nes-btn', styles.btn)}
-      onClick={handleAction}
+      onClick={toggleSfx}
       aria-label={sfxEnabled ? 'Disable sound effects' : 'Enable sound effects'}
     >
       <img

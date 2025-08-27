@@ -13,7 +13,7 @@ const SfxContext = createContext<SfxContextType>({
   toggleSfx: () => {},
   playActionSfx: () => {},
   playBattlecrySfx: (id: number) => {
-    console.log(id);
+    void id;
   },
   playErrorSfx: () => {},
 });
