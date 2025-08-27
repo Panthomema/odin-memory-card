@@ -27,9 +27,9 @@ function SfxProvider({ children }: SfxProviderProps) {
     sounds.action.play();
   };
 
-  const playCardSfx = (id: number) => {
+  const playBattlecrySfx = (id: number) => {
     if (!sfxEnabled) return;
-    console.log(`Card sound played for Pokémon ${id}`);
+    console.log(`Battlecry played for Pokémon ${id}`);
     // Aquí usarías battlecries[id] o como tengas los .ogg
   };
 
@@ -44,7 +44,7 @@ function SfxProvider({ children }: SfxProviderProps) {
         sfxEnabled,
         toggleSfx,
         playActionSfx,
-        playCardSfx,
+        playBattlecrySfx,
         playErrorSfx,
       }}
     >

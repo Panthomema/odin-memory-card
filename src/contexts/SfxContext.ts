@@ -4,7 +4,7 @@ type SfxContextType = {
   sfxEnabled: boolean;
   toggleSfx: () => void;
   playActionSfx: () => void;
-  playCardSfx: (id: number) => void;
+  playBattlecrySfx: (id: number) => void;
   playErrorSfx: () => void;
 };
 
@@ -12,7 +12,7 @@ const SfxContext = createContext<SfxContextType>({
   sfxEnabled: true,
   toggleSfx: () => {},
   playActionSfx: () => {},
-  playCardSfx: (id: number) => {
+  playBattlecrySfx: (id: number) => {
     console.log(id);
   },
   playErrorSfx: () => {},
