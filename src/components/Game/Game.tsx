@@ -18,7 +18,7 @@ type GameProps = {
 function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardsData, setCardsData] = useState<PokemonCardData[]>([]);
   const [roundState, setRoundState] = useState<RoundState>('loading');
-  const { playActionSfx } = useContext(SfxContext);
+  const { playActionSfx, playBattlecrySfx } = useContext(SfxContext);
 
   const RETRY_ACTION: ModalAction = {
     label: 'RETRY',
@@ -51,6 +51,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   }, [gamePool, viewedPokemonIds]);
 
   const handleCardCommit = (id: number) => {
+    playBattlecrySfx(id);
     onPokemonView(id, GHOST_ID);
   };
 

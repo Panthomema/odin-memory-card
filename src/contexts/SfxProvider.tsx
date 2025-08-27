@@ -11,10 +11,12 @@ type SfxProviderProps = {
 function SfxProvider({ children }: SfxProviderProps) {
   const [sfxEnabled, setSfxEnabled] = useState(true);
 
+  const sfxVolume = 1;
+
   const sounds = useMemo(
     () => ({
-      action: new Howl({ src: [actionSfx], volume: 1 }),
-      error: new Howl({ src: [errorSfx], volume: 1 }),
+      action: new Howl({ src: [actionSfx], volume: sfxVolume }),
+      error: new Howl({ src: [errorSfx], volume: sfxVolume }),
     }),
     [],
   );
@@ -29,8 +31,8 @@ function SfxProvider({ children }: SfxProviderProps) {
 
   const playBattlecrySfx = (id: number) => {
     if (!sfxEnabled) return;
-    console.log(`Battlecry played for Pokémon ${id}`);
-    // Aquí usarías battlecries[id] o como tengas los .ogg
+    const url = `/sounds/battlecries/${id}.ogg`;
+    new Howl({ src: [url], volume: sfxVolume }).play();
   };
 
   const playErrorSfx = () => {
