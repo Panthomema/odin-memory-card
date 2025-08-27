@@ -2,11 +2,12 @@ import CardGrid from '@/components/CardGrid/CardGrid';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loading from '@/components/Loading/Loading';
 import { GHOST_ID } from '@/constants';
+import SfxContext from '@/contexts/SfxContext';
 import { getPokemonCards } from '@/helpers/api';
 import { generateRoundPool } from '@/helpers/game';
 import type { ModalAction, PokemonCardData, RoundState } from '@/types/ui';
 import { AnimatePresence, motion } from 'motion/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 type GameProps = {
   gamePool: number[];
@@ -17,10 +18,12 @@ type GameProps = {
 function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const [cardsData, setCardsData] = useState<PokemonCardData[]>([]);
   const [roundState, setRoundState] = useState<RoundState>('loading');
+  const { playActionSfx } = useContext(SfxContext);
 
   const RETRY_ACTION: ModalAction = {
     label: 'RETRY',
     onCommit: () => {
+      playActionSfx();
       setupRound();
     },
   };
@@ -28,6 +31,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
   const RESET_ACTION: ModalAction = {
     label: 'RESET',
     onCommit: () => {
+      playActionSfx();
       window.location.reload();
     },
   };

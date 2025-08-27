@@ -9,21 +9,23 @@ import Scoreboard from '@/components/Scoreboard/Scoreboard';
 import SfxToggleButton from '@/components/SfxToggleButton/SfxToggleButton';
 import WelcomeModal from '@/components/WelcomeModal/WelcomeModal';
 import WonGameModal from '@/components/WonGameModal/WonGameModal';
+import SfxContext from '@/contexts/SfxContext';
 import { generateGamePool } from '@/helpers/game';
 import type { GameState, ModalAction } from '@/types/ui';
 import { AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 function App() {
-  const [sfxEnabled, setSfxEnabled] = useState(true);
   const [gameState, setGameState] = useState<GameState>('start');
   const [gamePool, setGamePool] = useState<number[]>(generateGamePool());
   const [viewedPokemonIds, setViewedPokemonIds] = useState<number[]>([]);
   const [capturedGhosts, setCapturedGhosts] = useState(0);
+  const { sfxEnabled, playActionSfx } = useContext(SfxContext);
 
   const PLAY_ACTION: ModalAction = {
     label: 'PLAY',
     onCommit: () => {
+      playActionSfx();
       setGameState('playing');
     },
   };
@@ -31,6 +33,7 @@ function App() {
   const PLAY_AGAIN_ACTION: ModalAction = {
     label: 'PLAY AGAIN',
     onCommit: () => {
+      playActionSfx();
       setGameState('playing');
       setViewedPokemonIds([]);
       setGamePool(generateGamePool());
@@ -40,12 +43,9 @@ function App() {
   const RESET_ACTION: ModalAction = {
     label: 'RESET',
     onCommit: () => {
+      playActionSfx();
       window.location.reload();
     },
-  };
-
-  const toggleSfx = () => {
-    setSfxEnabled((prev) => !prev);
   };
 
   const decideRoundResult = (pokemonId: number, ghostId: number) => {
@@ -102,7 +102,7 @@ function App() {
       {gameState === 'playing' && (
         <>
           <header className={styles.header}>
-            <SfxToggleButton enabled={sfxEnabled} toggle={toggleSfx} />
+            <SfxToggleButton />
           </header>
           <main className={styles.main}>
             <Game

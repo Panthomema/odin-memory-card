@@ -1,12 +1,20 @@
-import Modal from '@/components/Modal/Modal';
-import type { ModalAction } from '@/types/ui';
 import PokedexIcon from '@/assets/icons/pokedex.svg?react';
+import Modal from '@/components/Modal/Modal';
+import SfxContext from '@/contexts/SfxContext';
+import type { ModalAction } from '@/types/ui';
+import { useContext, useEffect } from 'react';
 
 type ErrorModalProps = {
   actions: [ModalAction, ModalAction];
 };
 
 function ErrorModal({ actions }: ErrorModalProps) {
+  const { playErrorSfx } = useContext(SfxContext);
+
+  useEffect(() => {
+    playErrorSfx();
+  }, [playErrorSfx]);
+
   return (
     <Modal title="ERROR" Icon={PokedexIcon} actions={actions}>
       <p>
