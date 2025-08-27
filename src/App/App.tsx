@@ -1,4 +1,5 @@
 import styles from '@/App/App.module.css';
+import BackgroundMusic from '@/components/BackgroundMusic/BackgroundMusic';
 import Game from '@/components/Game/Game';
 import LostGameModal from '@/components/LostGameModal/LostGameModal';
 import Scoreboard from '@/components/Scoreboard/Scoreboard';
@@ -54,6 +55,8 @@ function App() {
 
   return (
     <>
+      <BackgroundMusic playing={gameState === 'playing'} muted={false} />
+
       <AnimatePresence mode="wait">
         {gameState === 'start' && (
           <WelcomeModal actions={[PLAY_ACTION, RESET_ACTION]} />
