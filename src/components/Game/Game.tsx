@@ -15,7 +15,7 @@ type GameProps = {
 };
 
 function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
-  const [cardData, setCardData] = useState<PokemonCardData[]>([]);
+  const [cardsData, setCardsData] = useState<PokemonCardData[]>([]);
   const [roundState, setRoundState] = useState<RoundState>('loading');
 
   const RETRY_ACTION: ModalAction = {
@@ -38,7 +38,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
       const ids = generateRoundPool(gamePool, viewedPokemonIds);
       const pokemonCardData = await getPokemonCards(ids);
 
-      setCardData(pokemonCardData);
+      setCardsData(pokemonCardData);
       setRoundState('ready');
     } catch (err) {
       console.error(err);
@@ -77,7 +77,7 @@ function Game({ gamePool, viewedPokemonIds, onPokemonView }: GameProps) {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
           >
-            <CardGrid cards={cardData} onCardCommit={handleCardCommit} />
+            <CardGrid cardsData={cardsData} onCardCommit={handleCardCommit} />
           </motion.div>
         )}
 

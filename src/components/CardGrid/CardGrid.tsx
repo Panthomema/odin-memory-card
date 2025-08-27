@@ -4,19 +4,21 @@ import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 import type { PokemonCardData } from '@/types/ui';
 
 type CardGridProps = {
-  cards: PokemonCardData[];
+  cardsData: PokemonCardData[];
   onCardCommit: (id: number) => void;
 };
 
-function CardGrid({ cards, onCardCommit }: CardGridProps) {
+function CardGrid({ cardsData, onCardCommit }: CardGridProps) {
   const { selectedIndex, setHoveredIndex } = useKeyboardNavigation({
-    itemCount: cards.length,
-    onEnter: onCardCommit,
+    itemCount: cardsData.length,
+    onEnter: (index) => {
+      onCardCommit(cardsData[index].id);
+    },
   });
 
   return (
     <div className={styles['card-grid']}>
-      {cards.map((pokemon, index) => (
+      {cardsData.map((pokemon, index) => (
         <Card
           key={pokemon.id}
           pokemon={pokemon}
