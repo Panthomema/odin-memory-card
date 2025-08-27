@@ -12,6 +12,7 @@ import { AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 
 function App() {
+  const [sfxEnabled, setSfxEnabled] = useState(true);
   const [gameState, setGameState] = useState<GameState>('start');
   const [gamePool, setGamePool] = useState<number[]>(generateGamePool());
   const [viewedPokemonIds, setViewedPokemonIds] = useState<number[]>([]);
@@ -40,7 +41,11 @@ function App() {
     },
   };
 
-  function decideRoundResult(pokemonId: number, ghostId: number) {
+  const toggleSfx = () => {
+    setSfxEnabled((prev) => !prev);
+  };
+
+  const decideRoundResult = (pokemonId: number, ghostId: number) => {
     if (viewedPokemonIds.includes(pokemonId)) {
       if (pokemonId === ghostId) {
         setGameState('won');
@@ -51,11 +56,11 @@ function App() {
     } else {
       setViewedPokemonIds((prev) => [...prev, pokemonId]);
     }
-  }
+  };
 
   return (
     <>
-      <BackgroundMusic playing={gameState === 'playing'} muted={false} />
+      <BackgroundMusic playing={gameState === 'playing'} muted={!sfxEnabled} />
 
       <AnimatePresence mode="wait">
         {gameState === 'start' && (
@@ -77,7 +82,7 @@ function App() {
       {gameState === 'playing' && (
         <>
           <header className={styles.header}>
-            <SfxToggleButton />
+            <SfxToggleButton enabled={sfxEnabled} toggle={toggleSfx} />
           </header>
           <main className={styles.main}>
             <Game

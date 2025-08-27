@@ -1,14 +1,25 @@
+import sfxOffIcon from '@/assets/icons/sfx-off.svg';
 import sfxOnIcon from '@/assets/icons/sfx-on.svg';
 import styles from '@/components/SfxToggleButton/SfxToggleButton.module.css';
 import clsx from 'clsx';
-/* import sfxOffIcon from '@/assets/icons/sfx-off.svg'; */
 
-function SfxToggleButton() {
-  const imgName = 'Sfx On';
+type SfxToggleButtonProps = {
+  enabled: boolean;
+  toggle: () => void;
+};
 
+function SfxToggleButton({ enabled, toggle }: SfxToggleButtonProps) {
   return (
-    <button className={clsx('nes-btn', styles.btn)}>
-      <img src={sfxOnIcon} alt={imgName} className={styles.icon} />
+    <button
+      className={clsx('nes-btn', styles.btn)}
+      onClick={toggle}
+      aria-label={enabled ? 'SFX On' : 'SFX Off'}
+    >
+      <img
+        src={enabled ? sfxOnIcon : sfxOffIcon}
+        alt={enabled ? 'Disable sound effects' : 'Enable sound effects'}
+        className={styles.icon}
+      />
     </button>
   );
 }
