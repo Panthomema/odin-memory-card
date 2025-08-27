@@ -13,7 +13,7 @@ function SfxToggleButton({ enabled, toggle }: SfxToggleButtonProps) {
     <button
       className={clsx('nes-btn', styles.btn)}
       onClick={toggle}
-      aria-label={enabled ? 'SFX On' : 'SFX Off'}
+      aria-label={enabled ? 'Disable sound effects' : 'Enable sound effects'}
     >
       <img
         src={enabled ? sfxOnIcon : sfxOffIcon}
