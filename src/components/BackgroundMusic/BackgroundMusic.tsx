@@ -1,40 +1,54 @@
-import background from '@/assets/sounds/background.mp3';
-import ReactHowler from 'react-howler';
 import { useEffect, useRef, useState } from 'react';
+import ReactHowler from 'react-howler';
 
 type BackgroundMusicProps = {
+  src: string;
+  volume: number;
   playing: boolean;
   muted: boolean;
 };
 
-function BackgroundMusic({ playing, muted }: BackgroundMusicProps) {
+function BackgroundMusic({
+  src,
+  volume,
+  playing,
+  muted,
+}: BackgroundMusicProps) {
   const playerRef = useRef<ReactHowler>(null);
-  const [fadingOut, setFadingOut] = useState(false);
+  const [shouldPlay, setShouldPlay] = useState<boolean>(playing);
+  const transitionTime = 1000;
 
   useEffect(() => {
     const howl = playerRef.current?.howler;
     if (!howl) return;
 
+    let transitionTimeout;
+
     if (playing) {
-      if (fadingOut) setFadingOut(false);
-      howl.seek(0);
-      howl.volume(0.3);
+      transitionTimeout = setTimeout(() => {
+        setShouldPlay(true);
+        howl.seek(0);
+        howl.volume(0);
+        howl.fade(0, volume, transitionTime);
+      }, transitionTime);
     } else {
-      setFadingOut(true);
-      howl.fade(howl.volume(), 0, 1000); // 1 segundo
-      const timeout = setTimeout(() => setFadingOut(false), 1000);
-      return () => clearTimeout(timeout);
+      howl.fade(howl.volume(), 0, transitionTime);
+      transitionTimeout = setTimeout(
+        () => setShouldPlay(false),
+        transitionTime,
+      );
     }
-  }, [playing, fadingOut]);
+
+    return () => clearTimeout(transitionTimeout);
+  }, [playing, volume, transitionTime]);
 
   return (
     <ReactHowler
       ref={playerRef}
-      src={background}
-      playing={playing || fadingOut}
-      loop
+      src={src}
+      playing={shouldPlay}
       mute={muted}
-      volume={0.3}
+      volume={volume}
     />
   );
 }

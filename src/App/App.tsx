@@ -1,4 +1,7 @@
 import styles from '@/App/App.module.css';
+import defeatMusic from '@/assets/sounds/defeat.mp3';
+import gameMusic from '@/assets/sounds/game.mp3';
+import victoryMusic from '@/assets/sounds/victory.mp3';
 import BackgroundMusic from '@/components/BackgroundMusic/BackgroundMusic';
 import Game from '@/components/Game/Game';
 import LostGameModal from '@/components/LostGameModal/LostGameModal';
@@ -60,7 +63,24 @@ function App() {
 
   return (
     <>
-      <BackgroundMusic playing={gameState === 'playing'} muted={!sfxEnabled} />
+      <BackgroundMusic
+        src={gameMusic}
+        volume={0.8}
+        playing={gameState === 'playing'}
+        muted={!sfxEnabled}
+      />
+      <BackgroundMusic
+        src={victoryMusic}
+        volume={0.8}
+        playing={gameState === 'won'}
+        muted={!sfxEnabled}
+      />
+      <BackgroundMusic
+        src={defeatMusic}
+        volume={0.8}
+        playing={gameState === 'lost'}
+        muted={!sfxEnabled}
+      />
 
       <AnimatePresence mode="wait">
         {gameState === 'start' && (
