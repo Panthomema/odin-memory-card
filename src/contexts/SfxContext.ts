@@ -6,6 +6,7 @@ type SfxContextType = {
   playActionSfx: () => void;
   playBattlecrySfx: (id: number) => void;
   playErrorSfx: () => void;
+  preloadBattlecries: (ids: number[]) => void;
 };
 
 const SfxContext = createContext<SfxContextType>({
@@ -16,6 +17,9 @@ const SfxContext = createContext<SfxContextType>({
     void id;
   },
   playErrorSfx: () => {},
+  preloadBattlecries: (ids: number[]) => {
+    void ids;
+  },
 });
 
 export default SfxContext;
