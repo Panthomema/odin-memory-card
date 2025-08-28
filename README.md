@@ -1,6 +1,6 @@
 # 🎮 PokéMemory
 
-[![Play on Vercel](https://vercel.com/button)](https://odin-memory-card-pi.vercel.app/)
+[![Play on Vercel](https://img.shields.io/badge/Play-Pok%C3%A9Memory-brightgreen)](https://odin-memory-card-pi.vercel.app/)
 
 A nostalgic Pokémon-themed memory card game built with modern web technologies. Test your memory skills while avoiding the tricky ghost Pokémon in this retro-styled gaming experience!
 
